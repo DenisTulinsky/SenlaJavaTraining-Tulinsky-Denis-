@@ -3,8 +3,9 @@ public class LineEngine implements ILineStep {
 
 	@Override
 	public IProductPart buildProductPart() {
-		// TODO Auto-generated method stub
-		return null;
+		Engine engine = new Engine();
+		System.out.println("Engine is built");
+		return engine;
 	}
 
 }
