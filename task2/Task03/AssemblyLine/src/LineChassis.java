@@ -3,8 +3,9 @@ public class LineChassis implements ILineStep {
 
 	@Override
 	public IProductPart buildProductPart() {
-		// TODO Auto-generated method stub
-		return null;
+		Chassis chassis = new Chassis();
+		System.out.println("Chassis is built");
+		return chassis;
 	}
 
 }
