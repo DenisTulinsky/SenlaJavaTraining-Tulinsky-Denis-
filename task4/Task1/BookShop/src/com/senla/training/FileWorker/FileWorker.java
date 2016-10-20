@@ -12,17 +12,17 @@ import com.senla.training.interfaces.IStorage;
 
 public class FileWorker implements IFileWorker {
 
-	private  String books_txt = "d:/Books.txt";
-	private  String preorders_txt = "d:/Preorders.txt";
-	private  String orders_txt = "d:/Orders.txt";
+	private String books_txt = "d:/Books.txt";
+	private String preorders_txt = "d:/Preorders.txt";
+	private String orders_txt = "d:/Orders.txt";
 	private IConverter converter;
 
-	public FileWorker(IConverter converter ) {
+	public FileWorker(IConverter converter) {
 		this.converter = converter;
-		//this.books_txt = args[0]
+
 	}
 
-	@Override 
+	@Override
 	public void writeToFile(IStorage storage) {
 		// wr books
 		List<IBook> allBooks = storage.getAllBooks();
@@ -44,7 +44,6 @@ public class FileWorker implements IFileWorker {
 
 		tfwbooks.writeToFile(strBooks);
 
-		
 		// wr orders
 		List<IOrder> allOrders = storage.getAllOrders();
 		TextFileWorker tfworders = new TextFileWorker(orders_txt);
@@ -62,10 +61,8 @@ public class FileWorker implements IFileWorker {
 
 		}
 		tfworders.writeToFile(strOrders);
-		
-		
 
-		//wr preorders
+		// wr preorders
 		List<IPreorder> allPreorders = storage.getAllPreorders();
 		TextFileWorker tfwpreorders = new TextFileWorker(preorders_txt);
 
@@ -82,14 +79,13 @@ public class FileWorker implements IFileWorker {
 
 		}
 		tfwpreorders.writeToFile(strPreorders);
-		
-					
+
 	}
-	
-	//read book
+
+	// read book
 
 	@Override
-	public void readFromFile(IStorage storage){
+	public void readFromFile(IStorage storage) {
 		TextFileWorker tfw = new TextFileWorker(books_txt);
 		String[] booksString = tfw.readFromFile();
 		for (int j = 0; j < booksString.length; j++) {
@@ -99,10 +95,8 @@ public class FileWorker implements IFileWorker {
 
 		}
 
-	
-//read preod
-	
-	
+		// read preod
+
 		TextFileWorker tfwPreord = new TextFileWorker(preorders_txt);
 		String[] preordersString = tfwPreord.readFromFile();
 		for (int j = 0; j < preordersString.length; j++) {
@@ -110,12 +104,10 @@ public class FileWorker implements IFileWorker {
 				storage.addPreorder(converter.stringToPreorder(preordersString[j]));
 			}
 
-		
+		}
 
-	}
-		
-		//read order
-		
+		// read order
+
 		TextFileWorker tfwOrder = new TextFileWorker(orders_txt);
 		String[] ordersString = tfwOrder.readFromFile();
 		for (int j = 0; j < ordersString.length; j++) {
@@ -123,10 +115,7 @@ public class FileWorker implements IFileWorker {
 				storage.addOrder(converter.stringToOrder(ordersString[j]));
 			}
 
-		
+		}
 
 	}
-	
 }
-}
-

@@ -28,7 +28,6 @@ public class Converter implements IConverter {
 				.append(book.getPrice()).append(",").append(book.getArrivalDate().getTime()).append(",")
 				.append(book.getDescription()).toString();
 
-		
 		return str;
 
 	}
@@ -92,9 +91,8 @@ public class Converter implements IConverter {
 
 	@Override
 	public String preorderToString(IPreorder preord) {
-		String str = new StringBuilder().append(preord.getAuthor()).append(",").append(preord.getTitle())
-				.append(",").append(preord.getPublishedDate().getTime()).append(",").append(preord.getStatus())
-				.toString();
+		String str = new StringBuilder().append(preord.getAuthor()).append(",").append(preord.getTitle()).append(",")
+				.append(preord.getPublishedDate().getTime()).append(",").append(preord.getStatus()).toString();
 		return str;
 
 	}

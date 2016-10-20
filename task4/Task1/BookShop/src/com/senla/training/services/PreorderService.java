@@ -25,17 +25,17 @@ public class PreorderService implements IPreorderService {
 	}
 
 	public void checkPreorders(String title, String author, Calendar publishedDate) {
-		storage.checkPreorder( title,  author,  publishedDate.getTime());
-		
+		storage.checkPreorder(title, author, publishedDate.getTime());
+
 	}
 
 	@Override
 	public void showAllPreorders() {
-		
-			List<IPreorder> allPreorders = storage.getAllPreorders();
-			for (IPreorder p : allPreorders) {
-				printer.print(p);
-			}
+
+		List<IPreorder> allPreorders = storage.getAllPreorders();
+		for (IPreorder p : allPreorders) {
+			printer.print(p);
+		}
 	}
 
 }

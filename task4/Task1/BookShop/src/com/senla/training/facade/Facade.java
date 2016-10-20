@@ -40,14 +40,14 @@ public class Facade implements IFacade {
 	
 	@Override
 	public void init() {
-		//String args[] в инит
+		
 		storage = new Storage(); 
 		printer = new Printer();
 		bservice = new BookService(storage,printer);
 		preodservice = new PreorderService(storage,printer);
 		orderservice = new OrderService(storage,printer);
 		converter = new Converter(storage);
-		fw = new FileWorker(converter);//, args);
+		fw = new FileWorker(converter);
 	    
 	
 	}
