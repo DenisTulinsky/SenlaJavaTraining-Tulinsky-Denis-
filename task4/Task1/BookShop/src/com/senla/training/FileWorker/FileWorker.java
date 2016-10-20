@@ -4,27 +4,37 @@ import java.util.List;
 
 import com.danco.training.TextFileWorker;
 import com.senla.training.interfaces.IBook;
+import com.senla.training.interfaces.IConverter;
 import com.senla.training.interfaces.IFileWorker;
+import com.senla.training.interfaces.IOrder;
+import com.senla.training.interfaces.IPreorder;
 import com.senla.training.interfaces.IStorage;
-import com.senla.training.model.Book;
 
 public class FileWorker implements IFileWorker {
 
-	@Override
+	private  String books_txt = "d:/Books.txt";
+	private  String preorders_txt = "d:/Preorders.txt";
+	private  String orders_txt = "d:/Orders.txt";
+	private IConverter converter;
+
+	public FileWorker(IConverter converter ) {
+		this.converter = converter;
+		//this.books_txt = args[0]
+	}
+
+	@Override 
 	public void writeToFile(IStorage storage) {
-		//wr books
+		// wr books
 		List<IBook> allBooks = storage.getAllBooks();
 
-		TextFileWorker tfw = new TextFileWorker("d:/Books.txt");
+		TextFileWorker tfwbooks = new TextFileWorker(books_txt);
 
-		String[] str = new String[allBooks.size()];
-
+		String[] strBooks = new String[allBooks.size()];
 		for (IBook book : allBooks) {
-			String bookString = book.bookToString();
-
-			for (int j = 0; j < str.length; j++) {
-				if (str[j] == null) {
-					str[j] = bookString;
+			String bookString = converter.bookToString(book);
+			for (int j = 0; j < strBooks.length; j++) {
+				if (strBooks[j] == null) {
+					strBooks[j] = bookString;
 
 					break;
 				}
@@ -32,26 +42,91 @@ public class FileWorker implements IFileWorker {
 
 		}
 
-		tfw.writeToFile(str);
-		
-		//wr orders
-		
-		
-	}
+		tfwbooks.writeToFile(strBooks);
 
+		
+		// wr orders
+		List<IOrder> allOrders = storage.getAllOrders();
+		TextFileWorker tfworders = new TextFileWorker(orders_txt);
+
+		String[] strOrders = new String[allOrders.size()];
+		for (IOrder order : allOrders) {
+			String orderString = converter.orderToString(order);
+			for (int j = 0; j < strOrders.length; j++) {
+				if (strOrders[j] == null) {
+					strOrders[j] = orderString;
+
+					break;
+				}
+			}
+
+		}
+		tfworders.writeToFile(strOrders);
+		
+		
+
+		//wr preorders
+		List<IPreorder> allPreorders = storage.getAllPreorders();
+		TextFileWorker tfwpreorders = new TextFileWorker(preorders_txt);
+
+		String[] strPreorders = new String[allPreorders.size()];
+		for (IPreorder preord : allPreorders) {
+			String preorderString = converter.preorderToString(preord);
+			for (int j = 0; j < strPreorders.length; j++) {
+				if (strPreorders[j] == null) {
+					strPreorders[j] = preorderString;
+
+					break;
+				}
+			}
+
+		}
+		tfwpreorders.writeToFile(strPreorders);
+		
+					
+	}
+	
+	//read book
 
 	@Override
-	public void readFromFile(IStorage storage) {
-		TextFileWorker tfw = new TextFileWorker("d:/Books.txt");
+	public void readFromFile(IStorage storage){
+		TextFileWorker tfw = new TextFileWorker(books_txt);
 		String[] booksString = tfw.readFromFile();
 		for (int j = 0; j < booksString.length; j++) {
 			if (booksString[j] != null) {
-				storage.addBook(new Book(booksString[j]));
-				
+				storage.addBook(converter.stringToBook(booksString[j]));
 			}
-			
-		}
-	
-	}
 
+		}
+
+	
+//read preod
+	
+	
+		TextFileWorker tfwPreord = new TextFileWorker(preorders_txt);
+		String[] preordersString = tfwPreord.readFromFile();
+		for (int j = 0; j < preordersString.length; j++) {
+			if (preordersString[j] != null) {
+				storage.addPreorder(converter.stringToPreorder(preordersString[j]));
+			}
+
+		
+
+	}
+		
+		//read order
+		
+		TextFileWorker tfwOrder = new TextFileWorker(orders_txt);
+		String[] ordersString = tfwOrder.readFromFile();
+		for (int j = 0; j < ordersString.length; j++) {
+			if (ordersString[j] != null) {
+				storage.addOrder(converter.stringToOrder(ordersString[j]));
+			}
+
+		
+
+	}
+	
 }
+}
+

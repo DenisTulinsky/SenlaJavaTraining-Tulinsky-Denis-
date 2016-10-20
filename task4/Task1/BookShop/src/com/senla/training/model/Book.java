@@ -1,22 +1,20 @@
 package com.senla.training.model;
 
-import java.time.Year;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
+import java.util.Date;
 import com.senla.training.interfaces.IBook;
 
 public class Book implements IBook {
 
 	private String title;
 	private String author;
-	private Year publishedDate;
+	private Date publishedDate;
 	private Boolean inStock;
 	private Integer price;
-	private Calendar arrivalDate;
+	private Date arrivalDate;
 	private String description;
+	private Integer preorders = 0;
 
-	public Book(String title, String author, Year publishedDate, Boolean inStock, Integer price, Calendar arrivalDate,
+	public Book(String title, String author, Date publishedDate, Boolean inStock, Integer price, Date arrivalDate,
 			String description) {
 
 		this.title = title;
@@ -29,87 +27,100 @@ public class Book implements IBook {
 	}
 
 	public Book(String bookString) {
-		String[] str = bookString.split(",");
-		this.title = str[0];
-		this.author = str[1];
-		this.publishedDate = Year.of(Integer.parseInt(str[2]));
-		this.inStock = Boolean.valueOf(str[3]);
-		this.price = Integer.valueOf(str[4]);
-		GregorianCalendar arD = new GregorianCalendar();
-		arD.setTimeInMillis(Long.valueOf(str[5]));
-		this.arrivalDate = arD;
-		this.description = str[6];
+		
 	}
 
+	
+	@Override
 	public String getTitle() {
 		return title;
 	}
 
+	
+	@Override
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	
+	@Override
 	public String getAuthor() {
 		return author;
 	}
 
+	
+	@Override
 	public void setAuthor(String author) {
 		this.author = author;
 	}
 
-	public Year getPublishedDate() {
+	
+	@Override
+	public Date getPublishedDate() {
 		return publishedDate;
 	}
 
-	public void setPublishedDate(Year publishedDate) {
+	
+	@Override
+	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
 	}
 
+	
+	@Override
 	public Boolean getInStock() {
 		return inStock;
 	}
 
+	
+	@Override
 	public void setInStock(Boolean inStock) {
 		this.inStock = inStock;
 	}
 
+	
+	@Override
 	public Integer getPrice() {
 		return price;
 	}
 
+	
+	@Override
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
-	public Calendar getArrivalDate() {
+	
+	@Override
+	public Date getArrivalDate() {
 		return arrivalDate;
 	}
 
-	public void setArrivalDate(Calendar arrivalDate) {
+	
+	@Override
+	public void setArrivalDate(Date arrivalDate) {
 		this.arrivalDate = arrivalDate;
 	}
 
+	
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	
+	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	@Override
-	public void printMe() {
-		System.out.println("Title: " + this.title + " Author: " + this.author + " Date of publication: "
-				+ this.publishedDate + " In Stock: " + this.inStock + " Price: " + this.price + " Arrival Date: "
-				+ this.arrivalDate + " Description: " + this.description);
-
+	public Integer getPreorders() {
+		return preorders;
 	}
 
-	@Override
-	public String bookToString() {
-		String str = this.title + "," + this.author + "," + this.publishedDate + "," + this.inStock + "," + this.price
-				+ "," + this.arrivalDate.getTimeInMillis() + "," + this.description;
-		return str;
-
+	public void setPreorders(Integer preorders) {
+		this.preorders = preorders;
 	}
+
+		
 }

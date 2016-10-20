@@ -1,11 +1,12 @@
 package com.senla.training.interfaces;
 
-import java.time.Year;
 import java.util.Calendar;
+import java.util.Comparator;
 
 
 public interface IBookService {
-	public void addBook(String title,String author, Year publishedDate, Boolean inStock, Integer price, Calendar arrivalDate, String description);
-	public void removeBook(IBook book);
-	public void showAllBooks();
+	public void addBook(String title,String author, Calendar publishedDate, Boolean inStock, Integer price, Calendar arrivalDate, String description);
+	public void removeBook(String title,String author, Calendar publishedDate, Boolean inStock, Integer price, Calendar arrivalDate, String description);
+	public void showAllBooks(Comparator<IBook> com);
+	
 }
