@@ -29,7 +29,7 @@ public class OrderService implements IOrderService {
 		List<IBook> books = storage.getAllBooks();
 		for (IBook b : books) {
 			if (b != null && b.getTitle().toString().equals(title.toString())
-					&& b.getAuthor().toString().equals(author.toString()))  {
+					&& b.getAuthor().toString().equals(author.toString())) {
 
 				order.setBook(b);
 				order.setPrice(b.getPrice());
@@ -59,7 +59,7 @@ public class OrderService implements IOrderService {
 	@Override
 	public void showAllOrders(Comparator<IOrder> com) {
 		List<IOrder> allOrders = storage.getAllOrders();
-		if(com != null){
+		if (com != null) {
 			Collections.sort(allOrders, com);
 		}
 		for (IOrder ord : allOrders) {
@@ -73,10 +73,10 @@ public class OrderService implements IOrderService {
 		List<IOrder> allOrders = storage.getAllOrders();
 		List<IOrder> periodOrders = new ArrayList<>();
 		for (IOrder ord : allOrders) {
-			if(ord.getStatus()){
+			if (ord.getStatus()) {
 				Calendar executiondate = new GregorianCalendar();
 				executiondate.setTime(ord.getExecutionDate());
-				if (executiondate.after(cal3) && executiondate.before(cal4)){
+				if (executiondate.after(cal3) && executiondate.before(cal4)) {
 					periodOrders.add(ord);
 				}
 			}
@@ -87,26 +87,22 @@ public class OrderService implements IOrderService {
 
 		}
 
-		
-		
 	}
-	
-	
-	
+
 	public void showExecOrdersCount(Calendar cal3, Calendar cal4) {
 		List<IOrder> allOrders = storage.getAllOrders();
 		List<IOrder> periodOrders = new ArrayList<>();
 		for (IOrder ord : allOrders) {
-			if(ord.getStatus()){
+			if (ord.getStatus()) {
 				Calendar executiondate = new GregorianCalendar();
 				executiondate.setTime(ord.getExecutionDate());
-				if (executiondate.after(cal3) && executiondate.before(cal4)){
+				if (executiondate.after(cal3) && executiondate.before(cal4)) {
 					periodOrders.add(ord);
 				}
 			}
 		}
-		
-		System.out.println("Количество выполненных заказов:"+periodOrders.size());
+
+		System.out.println("Количество выполненных заказов:" + periodOrders.size());
 	}
 
 	@Override
@@ -114,15 +110,15 @@ public class OrderService implements IOrderService {
 		List<IOrder> allOrders = storage.getAllOrders();
 		Integer sum = 0;
 		for (IOrder ord : allOrders) {
-			if(ord.getStatus()){
+			if (ord.getStatus()) {
 				Calendar executiondate = new GregorianCalendar();
 				executiondate.setTime(ord.getExecutionDate());
-				if (executiondate.after(c1) && executiondate.before(c5)){
+				if (executiondate.after(c1) && executiondate.before(c5)) {
 					sum += ord.getPrice();
 				}
 			}
 		}
-		System.out.println("Сумма заработанных средств:"+sum);
+		System.out.println("Сумма заработанных средств:" + sum);
 	}
 
 	@Override
@@ -134,14 +130,9 @@ public class OrderService implements IOrderService {
 				printer.print(ord);
 				break;
 			}
-			
+
 		}
-		
+
 	}
 
-	
-
-	
-
-	
 }

@@ -14,7 +14,7 @@ public class Storage implements IStorage {
 	private List<IBook> books;
 	private List<IPreorder> preorders;
 	private List<IOrder> orders;
-	
+
 	public Storage() {
 		books = new ArrayList<IBook>();
 		preorders = new ArrayList<IPreorder>();
@@ -83,8 +83,7 @@ public class Storage implements IStorage {
 		for (IOrder ord : orders) {
 			if (ord != null && !ord.getStatus() && ord.getBook().getTitle().toString() == title.toString()
 					&& ord.getBook().getAuthor().toString().equals(author.toString())
-					&& ord.getCustomer().toString().equals(customer.toString()) && ord.getPrice() == price)
-					  {
+					&& ord.getCustomer().toString().equals(customer.toString()) && ord.getPrice() == price) {
 				orders.remove(ord);
 				break;
 			}
@@ -93,24 +92,23 @@ public class Storage implements IStorage {
 	}
 
 	@Override
-	public void executeOrder (String title, String author, String customer, int price, Date executiondate) {
-			for (IOrder ord : orders) {
-				if (ord != null && ord.getBook().getTitle().toString().equals(title.toString())
-						&& ord.getBook().getAuthor().toString().equals(author.toString())
-						&& ord.getCustomer().toString().equals(customer.toString()) && ord.getPrice() == price)
-						  {
-					
-					//ord.setExecutionDate(Calendar.getInstance().getTime());
-					ord.setStatus(true);
-					break;
-				}
+	public void executeOrder(String title, String author, String customer, int price, Date executiondate) {
+		for (IOrder ord : orders) {
+			if (ord != null && ord.getBook().getTitle().toString().equals(title.toString())
+					&& ord.getBook().getAuthor().toString().equals(author.toString())
+					&& ord.getCustomer().toString().equals(customer.toString()) && ord.getPrice() == price) {
+
+				// ord.setExecutionDate(Calendar.getInstance().getTime());
+				ord.setStatus(true);
+				break;
+			}
 		}
-		
+
 	}
 
 	@Override
 	public List<IPreorder> getAllPreorders() {
-		
+
 		return preorders;
 	}
 

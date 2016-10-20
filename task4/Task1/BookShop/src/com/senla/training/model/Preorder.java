@@ -5,7 +5,7 @@ import java.util.Date;
 import com.senla.training.interfaces.IPreorder;
 
 public class Preorder implements IPreorder {
-	
+
 	private String title;
 	private String author;
 	private Date publishedDate;
@@ -18,7 +18,7 @@ public class Preorder implements IPreorder {
 	}
 
 	public Preorder(String preorderstring) {
-		
+
 	}
 
 	public Boolean getStatus() {

@@ -4,21 +4,20 @@ import java.util.Date;
 
 public interface IPreorder {
 
-	public Boolean getStatus() ;
+	public Boolean getStatus();
 
-	public void setStatus(Boolean status) ;
+	public void setStatus(Boolean status);
 
 	public String getTitle();
 
-	public void setTitle(String title) ;
+	public void setTitle(String title);
 
-	public String getAuthor() ;
+	public String getAuthor();
 
 	public void setAuthor(String author);
 
-	public Date getPublishedDate() ;
+	public Date getPublishedDate();
 
 	public void setPublishedDate(Date publishedDate);
-
 
 }
