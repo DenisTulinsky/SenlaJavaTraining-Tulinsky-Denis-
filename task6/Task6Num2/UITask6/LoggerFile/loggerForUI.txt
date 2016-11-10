@@ -1,0 +1,66 @@
+2016-11-03 02:52:49,394 (Facade.java:addPreorder:117) / by zero 
+2016-11-05 17:14:32,973 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:14:50,054 (Facade.java:removeBook:78)  
+2016-11-05 17:22:29,947 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:23:46,863 (Facade.java:removeBook:78)  
+2016-11-05 17:23:56,946 (Facade.java:removeBook:78)  
+2016-11-05 17:25:59,603 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:27:46,973 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:28:39,710 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:29:18,068 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:29:58,110 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:32:23,317 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:33:58,753 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:37:30,580 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:37:40,338 (Facade.java:removeBook:78)  
+2016-11-05 17:39:23,846 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 17:39:31,005 (Facade.java:removeBook:78)  
+2016-11-05 17:57:12,570 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 18:35:34,467 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 18:37:13,607 (OrderService.java:executeOrder:64)  
+2016-11-05 18:39:00,557 (FileWorker.java:readFromFile:132) 1 
+2016-11-05 18:40:20,234 (OrderService.java:cancelOrder:82)  
+2016-11-05 18:56:03,039 (FileWorker.java:readFromFile:132) 1 
+2016-11-06 17:22:11,306 (Facade.java:addPreorder:143)  
+2016-11-06 17:24:52,145 (Facade.java:addPreorder:143)  
+2016-11-06 17:34:31,739 (Facade.java:addPreorder:143)  
+2016-11-06 17:44:45,992 (Facade.java:addPreorder:143)  
+2016-11-06 17:45:48,049 (Facade.java:addPreorder:143)  
+2016-11-07 03:53:20,214 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:02:14,687 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:03:12,321 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:06:32,067 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:28:20,856 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:44:50,289 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:46:03,037 (OrderService.java:executeOrder:67)  
+2016-11-07 04:50:09,307 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:52:21,964 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:59:07,339 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 04:59:50,086 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 05:00:32,681 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 05:00:55,281 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 05:07:33,504 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 05:19:46,835 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status. 
+2016-11-07 05:21:39,527 (OrderService.java:addOrder:47)  
+2016-11-07 05:24:14,653 (Facade.java:addOrder:154)  
+2016-11-07 05:26:17,012 (Facade.java:addOrder:154)  
+2016-11-07 05:29:35,429 (Facade.java:addOrder:154)  
+2016-11-07 05:56:12,287 (FileWorker.java:readFromFile:130) No enum constant com.senla.training.status.Status.true 
+2016-11-07 05:58:21,859 (DataWorker.java:getInteger:81) For input string: "q" 
+2016-11-07 15:36:31,006 (DataWorker.java:getInteger:87) For input string: "w" 
+2016-11-07 15:36:34,596 (DataWorker.java:getInteger:87) For input string: "w" 
+2016-11-07 16:31:01,124 (Facade.java:viewOrderDetail:237)  
+2016-11-08 00:04:26,705 (DataWorker.java:getInteger:84) For input string: "1111.11.11" 
+2016-11-08 01:58:57,718 (DataWorker.java:formatDate:40) Unparseable date: "q" 
+2016-11-08 02:56:38,859 (DataWorker.java:formatDate:40) Unparseable date: "wevw" 
+2016-11-08 02:56:46,805 (Facade.java:addOrder:154)  
+2016-11-10 13:07:50,325 (Facade.java:addBook:71)  
+2016-11-10 13:16:15,665 (Facade.java:addBook:71)  
+2016-11-10 13:20:20,645 (Facade.java:addBook:71)  
+2016-11-10 13:22:48,676 (InputReader.java:getInteger:63) For input string: "1111.11.11" 
+2016-11-10 13:45:18,178 (FileWorker.java:readFromFile:137) For input string: "ev" 
+2016-11-10 13:48:38,006 (FileWorker.java:readFromFile:137) For input string: "null" 
+2016-11-10 14:04:07,146 (FileWorker.java:readFromFile:137) For input string: "null" 
+2016-11-10 14:12:32,013 (FileWorker.java:readFromFile:137) For input string: "null" 
+2016-11-10 14:15:28,189 (FileWorker.java:readFromFile:137) For input string: "null" 
+2016-11-10 14:17:19,826 (InputReader.java:getDate:40) Unparseable date: "e" 
