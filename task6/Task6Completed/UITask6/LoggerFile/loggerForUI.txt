@@ -1,0 +1,82 @@
+2016-11-12 18:10:14,707 (FileWorker.java:writeToFile:88) java.nio.file.FileSystemException: d:\Orders.csv: Процесс не может получить доступ к файлу, так как этот файл занят другим процессом.
+ 
+2016-11-12 18:15:18,382 (FileWorker.java:writeToFile:91) java.nio.file.FileSystemException: d:\Preorders.csv: Процесс не может получить доступ к файлу, так как этот файл занят другим процессом.
+ 
+2016-11-12 19:27:29,767 (FileWorker.java:writeToFile:109)  
+2016-11-13 01:14:41,352 (FileWorker.java:readBooksFromCsv:130)  
+2016-11-13 02:49:24,564 (FileWorker.java:readBooksFromCsv:120) For input string: "222222222222222" 
+2016-11-13 02:51:51,666 (FileWorker.java:readBooksFromCsv:120) For input string: "222222222222222" 
+2016-11-13 03:41:05,132 (FileWorker.java:readPreordersFromCsv:141) No enum constant com.senla.training.status.Status.1 
+2016-11-14 11:20:40,691 (InputReader.java:getDate:40) Unparseable date: "1111.11" 
+2016-11-14 11:23:03,105 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:23:03,109 (FileWorker.java:readOrdersFromCsv:146)  
+2016-11-14 11:23:03,110 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 11:26:53,321 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:26:53,325 (FileWorker.java:readOrdersFromCsv:146)  
+2016-11-14 11:26:53,327 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 11:31:38,448 (SerializationUtility.java:deserialize:43)  
+2016-11-14 11:31:38,466 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:31:38,467 (FileWorker.java:readOrdersFromCsv:146)  
+2016-11-14 11:31:38,471 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 11:33:10,517 (SerializationUtility.java:deserialize:43)  
+2016-11-14 11:33:10,535 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:33:10,536 (FileWorker.java:readOrdersFromCsv:146)  
+2016-11-14 11:33:10,540 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 11:33:46,850 (SerializationUtility.java:deserialize:44)  
+2016-11-14 11:33:46,867 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:33:46,869 (FileWorker.java:readOrdersFromCsv:146)  
+2016-11-14 11:33:46,873 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 11:35:01,534 (SerializationUtility.java:deserialize:44)  
+2016-11-14 11:35:01,551 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:35:01,553 (FileWorker.java:readOrdersFromCsv:146)  
+2016-11-14 11:35:01,556 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 11:38:08,609 (SerializationUtility.java:deserialize:44)  
+2016-11-14 11:38:08,627 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:38:08,628 (FileWorker.java:readOrdersFromCsv:146)  
+2016-11-14 11:38:08,632 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 11:38:35,494 (Facade.java:addOrder:200)  
+2016-11-14 11:39:22,801 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:39:29,377 (InputReader.java:getInteger:63) For input string: "vewvwev" 
+2016-11-14 11:39:54,544 (InputReader.java:getInteger:63) For input string: "erv" 
+2016-11-14 11:42:44,223 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:46:10,498 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:47:32,178 (InputReader.java:getInteger:63) For input string: "rtvtre" 
+2016-11-14 11:49:03,047 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:49:06,001 (InputReader.java:getInteger:63) For input string: "wscdwe" 
+2016-11-14 11:49:07,207 (InputReader.java:getInteger:63) For input string: "cqweac" 
+2016-11-14 11:49:48,612 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:49:50,467 (InputReader.java:getInteger:63) For input string: "asvc" 
+2016-11-14 11:49:51,238 (InputReader.java:getInteger:63) For input string: "secd" 
+2016-11-14 11:55:29,887 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:55:32,734 (InputReader.java:getInteger:63) For input string: "dfvsdf" 
+2016-11-14 11:55:33,538 (InputReader.java:getInteger:63) For input string: "dvsedv" 
+2016-11-14 11:58:56,457 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:58:59,146 (InputReader.java:getInteger:63) For input string: "fdvae" 
+2016-11-14 11:59:00,320 (InputReader.java:getInteger:63) For input string: "" 
+2016-11-14 11:59:53,274 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 11:59:56,877 (InputReader.java:getInteger:63) For input string: "asevfe" 
+2016-11-14 12:00:03,206 (InputReader.java:getInteger:63) For input string: "wef" 
+2016-11-14 12:07:28,002 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 12:07:32,259 (InputReader.java:getInteger:63) For input string: "awfcea" 
+2016-11-14 12:07:33,429 (InputReader.java:getInteger:63) For input string: "aerc" 
+2016-11-14 13:04:13,353 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 13:04:15,024 (InputReader.java:getInteger:63) For input string: "wef" 
+2016-11-14 13:04:15,912 (InputReader.java:getInteger:63) For input string: "wef" 
+2016-11-14 13:09:25,316 (FileWorker.java:readOrdersFromCsv:146)  
+2016-11-14 13:09:25,336 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 13:12:10,814 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 13:12:10,819 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 13:12:30,989 (SerializationUtility.java:deserialize:42)  
+2016-11-14 13:12:31,113 (FileWorker.java:readPreordersFromCsv:125)  
+2016-11-14 13:12:31,118 (FileWorker.java:readBooksFromCsv:104)  
+2016-11-14 13:21:12,867 (SerializationUtility.java:deserialize:42)  
+2016-11-14 13:21:52,791 (SerializationUtility.java:deserialize:42)  
+2016-11-14 13:22:47,140 (SerializationUtility.java:deserialize:42)  
+2016-11-14 13:55:50,518 (SerializationUtility.java:deserialize:42)  
+2016-11-14 13:58:48,388 (SerializationUtility.java:deserialize:42)  
+2016-11-14 14:03:48,614 (SerializationUtility.java:deserialize:42)  
+2016-11-14 14:05:27,358 (SerializationUtility.java:deserialize:42)  
+2016-11-14 14:05:33,866 (ConverterReadableString.java:convert:33)  
+2016-11-14 14:05:33,867 (ConverterReadableString.java:convert:33)  
+2016-11-14 14:05:33,873 (ConverterReadableString.java:convert:33)  
+2016-11-14 14:30:57,742 (SerializationUtility.java:deserialize:42)  
