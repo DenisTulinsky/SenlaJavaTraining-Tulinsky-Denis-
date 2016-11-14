@@ -10,7 +10,6 @@ import com.senla.training.interfaces.IConverter;
 import com.senla.training.interfaces.IFileWorker;
 import com.senla.training.interfaces.IOrder;
 import com.senla.training.interfaces.IPreorder;
-import com.senla.training.interfaces.IPreorderService;
 import com.senla.training.interfaces.IStorage;
 import com.senla.training.tools.CSVUtility;
 
@@ -18,16 +17,16 @@ public class FileWorker implements IFileWorker {
 
 	private IConverter converter;
 	private final Logger log = Logger.getLogger(FileWorker.class);
-	private IPreorderService preorderservice;
+	
 
-	public FileWorker(IConverter converter, IPreorderService preorderservice ) {
+	public FileWorker(IConverter converter ) {
 		this.converter = converter;
-		this.preorderservice = preorderservice;
+		
 	}
 
 	@Override
 	public void writeBooksToCsv(IStorage storage) {
-		CSVUtility csvUtil = new CSVUtility("d:/Books.csv");
+		CSVUtility csvUtil = new CSVUtility("Resources/Books.csv");
 
 		try {
 			List<IBook> allBooks = storage.getAllBooks();
@@ -49,7 +48,7 @@ public class FileWorker implements IFileWorker {
 
 	public void writeOrdersToCsv(IStorage storage) {
 
-		CSVUtility csvUtil = new CSVUtility("d:/Orders.csv");
+		CSVUtility csvUtil = new CSVUtility("Resources/Orders.csv");
 		try {
 			List<IOrder> allOrders = storage.getAllOrders();
 			List<String> strOrders = new ArrayList<String>();
@@ -67,7 +66,7 @@ public class FileWorker implements IFileWorker {
 	}
 
 	public void writePreordersToCsv(IStorage storage) {
-		CSVUtility csvUtil = new CSVUtility("d:/Preorders.csv");
+		CSVUtility csvUtil = new CSVUtility("Resources/Preorders.csv");
 		try {
 
 			List<IPreorder> allPreorders = storage.getAllPreorders();
@@ -88,7 +87,7 @@ public class FileWorker implements IFileWorker {
 
 	@Override
 	public void readBooksFromCsv(IStorage storage) {
-		CSVUtility csvUtil = new CSVUtility("d:/Books.csv");
+		CSVUtility csvUtil = new CSVUtility("Resources/Books.csv");
 
 		try {
 
@@ -109,14 +108,14 @@ public class FileWorker implements IFileWorker {
 
 	@Override
 	public void readPreordersFromCsv(IStorage storage) {
-		CSVUtility csvUtil = new CSVUtility("d:/Preorders.csv");
+		CSVUtility csvUtil = new CSVUtility("Resources/Preorders.csv");
 		try {
 
 			List<String> strPreorders = csvUtil.readFromCsv();
 
 			for (String str : strPreorders) {
 				IPreorder preorder = converter.stringToPreorder(str);
-				preorderservice.addPreorder(preorder);
+				storage.addPreorder(preorder);
 
 			}
 
@@ -130,7 +129,7 @@ public class FileWorker implements IFileWorker {
 
 	@Override
 	public void readOrdersFromCsv(IStorage storage) {
-		CSVUtility csvUtil = new CSVUtility("d:/Orders.csv");
+		CSVUtility csvUtil = new CSVUtility("Resources/Orders.csv");
 
 		try {
 

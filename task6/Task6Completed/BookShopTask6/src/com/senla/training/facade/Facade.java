@@ -59,7 +59,7 @@ public class Facade implements IFacade {
 		preodservice = new PreorderService(storage, printer);
 		orderservice = new OrderService(storage, printer);
 		converter = new Converter(storage);
-		fw = new FileWorker(converter,preodservice);
+		fw = new FileWorker(converter);
 
 	}
 
