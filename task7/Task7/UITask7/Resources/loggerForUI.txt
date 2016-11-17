@@ -1,0 +1,2 @@
+2016-11-15 22:18:49,518 (InputReader.java:getInteger:61) For input string: "wegvwe" 
+2016-11-15 22:18:50,778 (InputReader.java:getInteger:61) For input string: "ev" 
