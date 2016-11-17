@@ -10,8 +10,21 @@ import com.senla.training.annotations.Printable;
 import com.senla.training.annotations.PrintableObject;
 import com.senla.training.annotations.PrintableRef;
 
+/**
+ * Class for printing out annotated objects.
+ * 
+ * @author Denis
+ *
+ */
 public class AnnotationsWorker {
-
+	/**
+	 * Receives Map. Prints entries from the Map
+	 *
+	 * @param Map<Integer,
+	 *            String>
+	 * @throws llegalArgumentException,
+	 *             IllegalAccessException
+	 */
 	public static void print(Object obj) throws IllegalArgumentException, IllegalAccessException {
 
 		Map<Integer, String> map = getMap(obj);
@@ -21,6 +34,14 @@ public class AnnotationsWorker {
 		}
 	}
 
+	/**
+	 * Puts annotated fields names and values in the map. Returns Map
+	 *
+	 * @param Object   
+	 * @return Map<Integer, String>
+	 * @throws llegalArgumentException,
+	 *             IllegalAccessException
+	 */
 	public static Map<Integer, String> getMap(Object obj) throws IllegalArgumentException, IllegalAccessException {
 
 		Map<Integer, String> map = new HashMap<Integer, String>();
@@ -48,14 +69,10 @@ public class AnnotationsWorker {
 
 						map.put(printableAnn.order(),
 								printableAnn.name() + ": " + String.valueOf(getMap(field.get(obj))) + " ");
-
 					}
 				}
-
 			}
-
 		}
 		return map;
 	}
-
 }
