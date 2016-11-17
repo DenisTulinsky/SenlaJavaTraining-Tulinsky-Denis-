@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.senla.training.DI.DI;
 import com.senla.training.comparators.BookByArrivalDate;
 import com.senla.training.comparators.BookByPriceComparator;
 import com.senla.training.comparators.BookByPublDateComparator;
@@ -17,31 +18,27 @@ import com.senla.training.comparators.OrderByStatusComp;
 import com.senla.training.comparators.PreordersByNumberComp;
 import com.senla.training.comparators.PreordersByTitleComp;
 import com.senla.training.interfaces.IBook;
+import com.senla.training.interfaces.IBookService;
+import com.senla.training.interfaces.ICSVFileWorker;
 import com.senla.training.interfaces.IConverter;
 import com.senla.training.interfaces.IConverterReadableString;
 import com.senla.training.interfaces.IFacade;
-import com.senla.training.interfaces.ICSVFileWorker;
 import com.senla.training.interfaces.IOrder;
 import com.senla.training.interfaces.IOrderService;
 import com.senla.training.interfaces.IPreorder;
 import com.senla.training.interfaces.IPreorderService;
-import com.senla.training.interfaces.IStorage;
 import com.senla.training.interfaces.ISerializationUtility;
+import com.senla.training.interfaces.IStorage;
 import com.senla.training.properties.PropertyFactory;
-import com.senla.training.services.BookService;
-import com.senla.training.services.OrderService;
-import com.senla.training.services.PreorderService;
-import com.senla.training.storage.Storage;
 import com.senla.training.tools.CSVFileWorker;
 import com.senla.training.tools.Converter;
-import com.senla.training.tools.ConverterReadableString;
 import com.senla.training.tools.SerializationUtility;
 
 public class Facade implements IFacade {
 	private IStorage storage;
-	private BookService bservice;
+	private IBookService bservice;
 	private ICSVFileWorker fw;
-	private IConverterReadableString printer;
+	private IConverterReadableString converterReadableString;
 	private IConverter converter;
 	private IPreorderService preodservice;
 	private IOrderService orderservice;
@@ -53,12 +50,12 @@ public class Facade implements IFacade {
 		serializationUtil = new SerializationUtility();
 		storage = serializationUtil.deserialize();
 		if (storage == null) {
-			storage = new Storage();
+			storage = (IStorage) DI.load(IStorage.class);//new Storage();
 				}
-		printer = new ConverterReadableString();
-		bservice = new BookService(storage, printer);
-		preodservice = new PreorderService(storage, printer);
-		orderservice = new OrderService(storage, printer);
+		converterReadableString = (IConverterReadableString) DI.load(IConverterReadableString.class); //new ConverterReadableString();
+		bservice = (IBookService) DI.load(IBookService.class, storage, converterReadableString); //new BookService(storage, converterReadableString);
+		preodservice =(IPreorderService) DI.load(IPreorderService.class,storage, converterReadableString); // new PreorderService(storage, converterReadableString);
+		orderservice =(IOrderService) DI.load(IOrderService.class,storage, converterReadableString); // new OrderService(storage, converterReadableString);
 		converter = new Converter(storage);
 		fw = new CSVFileWorker(converter);
 

@@ -7,16 +7,16 @@ import com.senla.training.interfaces.IInputReader;
 import com.senla.training.interfaces.IMenu;
 import com.senla.training.interfaces.IMenuBuilder;
 import com.senla.training.interfaces.IMenuItem;
+import com.senla.training.interfaces.INavigator;
 import com.senla.training.tools.InputReader;
 import com.senla.training.tools.Printer;
 import com.senla.training.tools.ScannerUI;
 
-public class Navigator {
+public class Navigator implements INavigator {
 
 	private static final String BYE = "\nBye";
 	private static final String CHOOSE = "\nChoose Option";
 	private static final String WRONG_OPTION = "Wrong Option";
-	private static Navigator navigator;
 	private IMenu mainmenu;
 	private IMenu currentMenu;
 	private ScannerUI scanner;
@@ -25,7 +25,7 @@ public class Navigator {
 	private IInputReader input;
 	
 
-	private Navigator() {
+	public Navigator() {
 		menubuilder = (IMenuBuilder) DI.load(IMenuBuilder.class); //new MenuBuilder();
 		mainmenu = menubuilder.build();
 		scanner = new ScannerUI();
@@ -34,14 +34,12 @@ public class Navigator {
 		
 		
 	}
+	
 
-	public static Navigator getInstance() {
-		if (navigator == null) {
-			navigator = new Navigator();
-		}
-		return navigator;
-	}
-
+	/* (non-Javadoc)
+	 * @see com.senla.training.navigator.INavigator#navigate()
+	 */
+	@Override
 	public void navigate() {
 
 		currentMenu = mainmenu;
