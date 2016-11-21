@@ -46,12 +46,6 @@ public class OrderService implements IOrderService {
 		}
 		if (nobook)
 			throw new NullPointerException();
-		try {
-			AnnotationsWorker.print(order);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-
-			log.error(e.getMessage());
-		}
 	}
 
 	@Override
@@ -156,19 +150,22 @@ public class OrderService implements IOrderService {
 	public List<String> viewOrderDetail(String bookstitle, String customer) {
 		List<IOrder> allOrders = storage.getAllOrders();
 		List<String> result = new ArrayList<>();
-		try {
-			for (IOrder ord : allOrders) {
+		try{
+		for (IOrder ord : allOrders) {
 
 				if (ord != null && ord.getBook().getTitle().equals(bookstitle) && ord.getCustomer().equals(customer)) {
-					result.add(converterToString.convert(ord));
+					try {
+						result = AnnotationsWorker.createAnnotation(ord);
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						log.error(e.getMessage());
+					}
 				}
 			}
-		} catch (Exception e) {
+		}catch (Exception e) {
 			log.error(e.getMessage());
 		}
-		return result;
-
-	}
+			return result;
+		}
 
 	/**
 	 * 

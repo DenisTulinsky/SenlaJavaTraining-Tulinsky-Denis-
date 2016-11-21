@@ -30,8 +30,6 @@ import com.senla.training.interfaces.IPreorderService;
 import com.senla.training.interfaces.ISerializationUtility;
 import com.senla.training.interfaces.IStorage;
 import com.senla.training.properties.PropertyFactory;
-import com.senla.training.tools.CSVFileWorker;
-import com.senla.training.tools.Converter;
 import com.senla.training.tools.SerializationUtility;
 
 public class Facade implements IFacade {
@@ -50,14 +48,14 @@ public class Facade implements IFacade {
 		serializationUtil = new SerializationUtility();
 		storage = serializationUtil.deserialize();
 		if (storage == null) {
-			storage = (IStorage) DI.load(IStorage.class);//new Storage();
+			storage = (IStorage) DI.load(IStorage.class);
 				}
-		converterReadableString = (IConverterReadableString) DI.load(IConverterReadableString.class); //new ConverterReadableString();
-		bservice = (IBookService) DI.load(IBookService.class, storage, converterReadableString); //new BookService(storage, converterReadableString);
-		preodservice =(IPreorderService) DI.load(IPreorderService.class,storage, converterReadableString); // new PreorderService(storage, converterReadableString);
-		orderservice =(IOrderService) DI.load(IOrderService.class,storage, converterReadableString); // new OrderService(storage, converterReadableString);
-		converter = new Converter(storage);
-		fw = new CSVFileWorker(converter);
+		converterReadableString = (IConverterReadableString) DI.load(IConverterReadableString.class);
+		bservice = (IBookService) DI.load(IBookService.class, storage, converterReadableString); 
+		preodservice = (IPreorderService) DI.load(IPreorderService.class,storage, converterReadableString);
+		orderservice = (IOrderService) DI.load(IOrderService.class,storage, converterReadableString); 
+		converter = (IConverter) DI.load(IConverter.class,storage);
+		fw =  (ICSVFileWorker) DI.load(ICSVFileWorker.class,converter); 
 
 	}
 
