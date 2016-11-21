@@ -47,7 +47,7 @@ public class AddBook extends AbstrAction   {
 		String description = input.getString();
 
 		Boolean result = facade.addBook(ObjectCreator.createBook(title, author, publdate, status, price, arrdate, description));
-
+		
 		if (result) {
 
 			Printer.printString(BOOK_ADDED);

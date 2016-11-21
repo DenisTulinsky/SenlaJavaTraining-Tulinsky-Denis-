@@ -6,9 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.log4j.Logger;
-
-import com.senla.training.annotationsWorker.AnnotationsWorker;
 import com.senla.training.interfaces.IConverterReadableString;
 import com.senla.training.interfaces.IPreorder;
 import com.senla.training.interfaces.IPreorderService;
@@ -18,7 +15,6 @@ import com.senla.training.status.Status;
 public class PreorderService implements IPreorderService {
 	private IStorage storage;
 	private IConverterReadableString converterToString;
-	private final Logger log = Logger.getLogger(PreorderService.class);
 	
 	
 	public PreorderService(IStorage storage, IConverterReadableString converterToString) {
@@ -43,13 +39,6 @@ public class PreorderService implements IPreorderService {
 			preorder.setCount(1);
 			preorder.setId(UUID.randomUUID().toString());
 			storage.addPreorder(preorder);
-		}
-		try {
-			AnnotationsWorker.print(preorder);
-			
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			
-			log.error(e.getMessage());
 		}
 	}
 

@@ -18,6 +18,12 @@ import com.senla.training.interfaces.IStorage;
 import com.senla.training.properties.PropertyFactory;
 import com.senla.training.status.Status;
 
+/**
+ * Provides instruments for working with books and the storage.
+ * 
+ * @author Denis
+ *
+ */
 public class BookService implements IBookService {
 
 	private IStorage storage;
@@ -31,17 +37,10 @@ public class BookService implements IBookService {
 	}
 
 	@Override
-	public void addBook(IBook book)  {
+	public void addBook(IBook book) {
 		book.setId(UUID.randomUUID().toString());
-			storage.addBook(book);
-			try {
-				
-				AnnotationsWorker.print(book);
-			} catch (Exception e) {
-				log.error(e.getMessage());
-				
-			}
-		}
+		storage.addBook(book);
+	}
 
 	@Override
 	public void removeBook(String title) {
@@ -71,7 +70,11 @@ public class BookService implements IBookService {
 		List<IBook> allBooks = storage.getAllBooks();
 		for (IBook b : allBooks) {
 			if (b != null && b.getTitle().equals(title)) {
-				result.add(converterToString.convert(b));
+				try {
+					result = AnnotationsWorker.createAnnotation(b);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					log.error(e.getMessage());
+				}
 			}
 		}
 		return result;

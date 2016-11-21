@@ -2,7 +2,9 @@ package com.senla.training.annotationsWorker;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,26 +20,28 @@ import com.senla.training.annotations.PrintableRef;
  */
 public class AnnotationsWorker {
 	/**
-	 * Receives Map. Prints entries from the Map
+	 * Receives object, invokes getMap() method to get a map of object's fields. Returns List<String>.
 	 *
-	 * @param Map<Integer,
-	 *            String>
+	 * @param Object 
+	 * @return List<String>
 	 * @throws llegalArgumentException,
 	 *             IllegalAccessException
 	 */
-	public static void print(Object obj) throws IllegalArgumentException, IllegalAccessException {
+	public static List<String> createAnnotation(Object obj) throws IllegalArgumentException, IllegalAccessException {
 
 		Map<Integer, String> map = getMap(obj);
+		List<String> results = new ArrayList<>();
 
 		for (Entry<Integer, String> entry : map.entrySet()) {
-			System.out.println(entry.getKey() + " " + entry.getValue());
+			results.add(entry.getValue());
 		}
+		return results;
 	}
 
 	/**
 	 * Puts annotated fields names and values in the map. Returns Map
 	 *
-	 * @param Object   
+	 * @param Object
 	 * @return Map<Integer, String>
 	 * @throws llegalArgumentException,
 	 *             IllegalAccessException
@@ -55,12 +59,12 @@ public class AnnotationsWorker {
 
 					Annotation annotation = field.getAnnotation(Printable.class);
 					Printable printableAnn = (Printable) annotation;
+
 					if (printableAnn.isDetailedOnly()) {
 
 						map.put(printableAnn.order(),
 								printableAnn.name() + ": " + String.valueOf(field.get(obj)) + " ");
 					}
-
 				} else if (field.isAnnotationPresent(PrintableRef.class)) {
 
 					Annotation annotation = field.getAnnotation(PrintableRef.class);
@@ -68,7 +72,7 @@ public class AnnotationsWorker {
 					if (printableAnn.isDetailedView()) {
 
 						map.put(printableAnn.order(),
-								printableAnn.name() + ": " + String.valueOf(getMap(field.get(obj))) + " ");
+								printableAnn.name() + ": " + String.valueOf(createAnnotation(field.get(obj))) + " ");
 					}
 				}
 			}

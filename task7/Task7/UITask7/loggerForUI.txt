@@ -1,4 +1,0 @@
-2016-11-15 22:14:23,693 (InputReader.java:getInteger:61) For input string: "rvar" 
-2016-11-15 22:14:24,826 (InputReader.java:getInteger:61) For input string: "vwaev" 
-2016-11-15 22:15:14,873 (InputReader.java:getInteger:61) For input string: "wevwe" 
-2016-11-15 22:15:15,524 (InputReader.java:getInteger:61) For input string: "rv" 

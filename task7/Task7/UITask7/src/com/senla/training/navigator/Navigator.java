@@ -8,9 +8,8 @@ import com.senla.training.interfaces.IMenu;
 import com.senla.training.interfaces.IMenuBuilder;
 import com.senla.training.interfaces.IMenuItem;
 import com.senla.training.interfaces.INavigator;
-import com.senla.training.tools.InputReader;
+import com.senla.training.interfaces.IScannerUI;
 import com.senla.training.tools.Printer;
-import com.senla.training.tools.ScannerUI;
 
 public class Navigator implements INavigator {
 
@@ -19,17 +18,17 @@ public class Navigator implements INavigator {
 	private static final String WRONG_OPTION = "Wrong Option";
 	private IMenu mainmenu;
 	private IMenu currentMenu;
-	private ScannerUI scanner;
+	private IScannerUI scanner;
 	private IFacade facade =   (IFacade) DI.load(IFacade.class);  //new Facade();
 	private IMenuBuilder menubuilder;
 	private IInputReader input;
 	
 
 	public Navigator() {
-		menubuilder = (IMenuBuilder) DI.load(IMenuBuilder.class); //new MenuBuilder();
+		menubuilder = (IMenuBuilder) DI.load(IMenuBuilder.class); 
 		mainmenu = menubuilder.build();
-		scanner = new ScannerUI();
-		input = new InputReader(scanner);
+		scanner =(IScannerUI) DI.load(IScannerUI.class);
+		input = (IInputReader) DI.load(IInputReader.class,scanner);
 		facade.init();
 		
 		
