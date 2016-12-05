@@ -9,7 +9,7 @@ public class StartServer {
 		
 		
 		IServerConnector serverConnector = (IServerConnector) DI.load(IServerConnector.class);
-		
+		serverConnector.init();
 	}
 	}
 

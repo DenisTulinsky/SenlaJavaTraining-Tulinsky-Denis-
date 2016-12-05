@@ -20,3 +20,9 @@
 2016-12-01 15:32:18,322 (Transmitter.java:toServer:44)  
 2016-12-01 15:33:56,969 (Transmitter.java:toServer:44)  
 2016-12-01 15:36:12,240 (Transmitter.java:toServer:44)  
+2016-12-05 11:33:36,992 (Transmitter.java:toServer:46) com.senla.training.requestApi.Request 
+2016-12-05 11:58:39,393 (Transmitter.java:toServer:46) Connection reset 
+2016-12-05 11:58:39,401 (Printer.java:printList:35)  
+2016-12-05 13:23:20,317 (Transmitter.java:toServer:57)  
+2016-12-05 13:26:35,029 (Transmitter.java:toServer:57)  
+2016-12-05 13:28:13,943 (Transmitter.java:toServer:57)  

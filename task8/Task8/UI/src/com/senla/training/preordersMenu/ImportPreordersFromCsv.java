@@ -1,10 +1,8 @@
 package com.senla.training.preordersMenu;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.senla.training.abstractClass.AbstrAction;
 import com.senla.training.interfaces.IInputReader;
+import com.senla.training.requestApi.Request;
 import com.senla.training.tools.Printer;
 import com.senla.training.tools.Transmitter;
 
@@ -20,14 +18,12 @@ public class ImportPreordersFromCsv extends AbstrAction {
 	@Override
 	public void action(Transmitter transmitter, IInputReader input) {
 
-		Object[] method = { "readPreordersFromCsv" };
-
-		Map<String, Object[]> map = new HashMap<String, Object[]>();
-		map.put("methodName", method);
-		Boolean result = transmitter.toServer(map);
+		Object[] parameters = null;
+		Request request = new Request("readPreordersFromCsv", parameters);
+		
+		Boolean result = transmitter.toServer(request);
 		
 		if (result) {
-
 			Printer.printString(COMPLETED);
 		} else {
 			Printer.printString(ERROR);

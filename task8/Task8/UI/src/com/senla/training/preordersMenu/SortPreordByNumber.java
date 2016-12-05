@@ -1,10 +1,8 @@
 package com.senla.training.preordersMenu;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.senla.training.abstractClass.AbstrAction;
 import com.senla.training.interfaces.IInputReader;
+import com.senla.training.requestApi.Request;
 import com.senla.training.tools.Printer;
 import com.senla.training.tools.Transmitter;
 
@@ -17,11 +15,10 @@ public class SortPreordByNumber extends AbstrAction {
 	@Override
 	public void action(Transmitter transmitter, IInputReader input) {
 		
-		Object[] method = { "showPreordersByNumber" };
-		Map<String, Object[]> map = new HashMap<String, Object[]>();
-		map.put("methodName", method);
-
-		Printer.printList(transmitter.toServer(map));
+		Object[] parameters = null;
+		Request request = new Request("showPreordersByNumber", parameters);
+		
+		Printer.printList(transmitter.toServer(request));
 	}
 
 }
