@@ -1,10 +1,8 @@
 package com.senla.training.preordersMenu;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.senla.training.abstractClass.AbstrAction;
 import com.senla.training.interfaces.IInputReader;
+import com.senla.training.requestApi.Request;
 import com.senla.training.tools.Printer;
 import com.senla.training.tools.Transmitter;
 
@@ -26,16 +24,12 @@ public class AddPreorder extends AbstrAction {
 		String title = input.getString();
 		Printer.printString(AUTHOR);
 		String author = input.getString();
-		
-		Object[] method = {"addPreorder"};
-		Object[] parameters = {title, author};
 
-		Map<String, Object[]> map = new HashMap<String, Object[]>();
-		map.put("methodName", method);
-		map.put("params", parameters);
+		Object[] parameters = { title, author };
+		Request request = new Request("addPreorder", parameters);
 
-		Boolean result = transmitter.toServer(map);
-		
+		Boolean result = transmitter.toServer(request);
+
 		if (result) {
 
 			Printer.printString(PREORDER_CREATED);

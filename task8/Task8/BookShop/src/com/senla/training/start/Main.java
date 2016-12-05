@@ -11,7 +11,7 @@ public class Main {
 		
 		IFacade facade =   (IFacade) DI.load(IFacade.class); 
 		facade.init();
-		//IServerConnector serverConnector = new ServerConnector();
+		
 		
 
 	}

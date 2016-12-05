@@ -2,12 +2,13 @@ package com.senla.training.tools;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
+
 import com.senla.training.interfaces.IFacade;
+import com.senla.training.requestApi.Request;
 /**
- * Provides instruments for reading method name and parameters from a map and invoking the method.
+ * Provides instruments for reading method name and parameters from a Request object and invoking the method.
  * 
  * @author Denis
  *
@@ -20,31 +21,28 @@ public class MethodInvoker {
 		this.facade = facade;
 	}
 	/**
-	 * Reads method name from the map, reads arguments from the map,
+	 * Reads method name from the Request object, reads arguments from the Request object,
 	 *  gets all the methods of facade and invokes the method with arguments if the name matches
 	 *
-	 * @param Map<String, Object[]> 
+	 * @param Request object 
 	 * @return Object
 	 * @throws IllegalArgumentException,IllegalAccessException
 	 *             InvocationTargetException,ClassNotFoundException
 	 */
-	public Object implement(Map<String, Object[]> map) {
+	
+	public Object invoke(Request request) {
 		Object obj = null;
 		try {
 			Object[] parameters = null;
-
-			Object[] nameAsObject = map.get("methodName");
-			String nameFromMap = (String) nameAsObject[0];
-
-			if (map.get("params") != null) {
-				parameters = map.get("params");
+			if (request.getParams() != null) {
+				parameters = request.getParams();
 			}
 
 			Class<?> cl = Class.forName("com.senla.training.facade.Facade");
+			
 			Method[] allMethods = cl.getDeclaredMethods();
-
 			for (Method m : allMethods) {
-				if (m.getName().equals(nameFromMap)) {
+				if (m.getName().equals(request.getMethodName())) {
 					obj = m.invoke(facade, parameters);
 				}
 			}
@@ -58,6 +56,5 @@ public class MethodInvoker {
 			log.error(e.getMessage());
 		}
 		return obj;
-
 	}
 }

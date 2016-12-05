@@ -61,3 +61,11 @@
 2016-12-01 14:44:24,956 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
 2016-12-01 14:45:05,347 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
 2016-12-01 14:47:54,667 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
+2016-12-05 11:33:22,162 (ClientThread.java:run:63) Connection reset 
+2016-12-05 11:33:36,992 (ClientThread.java:run:63) writing aborted; java.io.NotSerializableException: com.senla.training.requestApi.Request 
+2016-12-05 11:38:47,958 (ClientThread.java:run:63) Connection reset 
+2016-12-05 11:44:18,963 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
+2016-12-05 11:44:37,074 (MethodInvoker.java:invoke:71) wrong number of arguments 
+2016-12-05 11:44:37,089 (ClientThread.java:run:63) Connection reset 
+2016-12-05 13:19:46,510 (ClientThread.java:run:53) Connection reset 
+2016-12-05 13:21:52,502 (ClientThread.java:run:53) Connection reset 

@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import com.senla.training.interfaces.IFacade;
+import com.senla.training.requestApi.Request;
 import com.senla.training.tools.MethodInvoker;
 /**
  * Provides instruments for reading/writing to the streams, invoking a method received from client, closes the streams. 
@@ -29,19 +29,21 @@ class ClientThread extends Thread {
 		invoker = new MethodInvoker(facade);
 	}
 	/**
-	 * Reads and writes to the stream,  disconnects the streams when receives an empty map.
+	 * Reads and writes to the stream,  disconnects the streams when receives a request with the name "Exit".
 	 * 
 	 */
 	public void run() {
 		
 		try {
 			while (true) {
-				Map<String, Object[]> map = (Map<String, Object[]>) objectInput.readObject();
-				if (map.isEmpty()) {
+				
+				Request request = (Request) objectInput.readObject();
+				if (request.getMethodName().equals("Exit")) {
 					disconnect();
 					break;
 				}
-				objectOutput.writeObject(invoker.implement(map));
+				objectOutput.writeObject(invoker.invoke(request));
+			
 			}
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());

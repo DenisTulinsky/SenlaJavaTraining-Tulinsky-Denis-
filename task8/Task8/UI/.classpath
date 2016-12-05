@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="libs/log4j-1.2.17.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DependencyInjection"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Annotations"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/RequestAPI"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

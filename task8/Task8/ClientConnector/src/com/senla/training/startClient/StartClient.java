@@ -6,7 +6,7 @@ import com.senla.training.clientTools.IClientConnector;
 public class StartClient {
 
 	public static void main(String[] args) {
-				IClientConnector connector =new ClientConnector();
+		IClientConnector connector =new ClientConnector();
 		connector.init();
 		
 	}
