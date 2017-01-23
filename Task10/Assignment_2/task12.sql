@@ -1,2 +1,3 @@
-Select avg(speed) from laptop
-where price > 1000
+select avg(laptop.speed) as speed
+from laptop
+where price > 1000;

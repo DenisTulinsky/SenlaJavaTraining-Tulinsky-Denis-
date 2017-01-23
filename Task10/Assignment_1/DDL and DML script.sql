@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS Computer_company;
+USE Computer_company;
 CREATE TABLE Product (
     maker VARCHAR(10),
     model VARCHAR(50) PRIMARY KEY,
