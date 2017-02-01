@@ -1,14 +1,13 @@
 package com.senla.training.interfaces;
 
-import java.util.Comparator;
 import java.util.List;
 
 public interface IPreorderService {
 
-	public void addPreorder(IPreorder preorder);
+	public boolean addPreorder(IPreorder preorder);
 
-	public void checkPreorders(String title, String author);
+	public boolean checkPreorders(String id);
 
-	public List<String> showAllPreorders(Comparator<IPreorder> com);
+	public List<String> showAllPreorders(String sortBy);
 
 }

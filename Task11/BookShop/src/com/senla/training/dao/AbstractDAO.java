@@ -7,91 +7,123 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.senla.training.model.Model;
 
 public abstract class AbstractDAO<T extends Model> {
 
-	protected Connection connection;
+	private final Logger log = Logger.getLogger(AbstractDAO.class);
 
-	public AbstractDAO(Connection connection) {
-		this.connection = connection;
-	}
-
-	public List<T> findAll(String sortBy) {
+	public List<T> findAllLazy(Connection cn, String sortBy) {
 		List<T> listObjects = new ArrayList<>();
 		PreparedStatement ps = null;
 		try {
-			ps = getQueryAll(sortBy);
+			ps = cn.prepareStatement(getQueryAllLazy() + sortBy);
+
 			ResultSet resultSet = ps.executeQuery();
 			while (resultSet.next()) {
-				T model = createObject(resultSet);
-				listObjects.add(model);
+				T entity = createObjectLazyInit(resultSet);
+				listObjects.add(entity);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} finally {
 			close(ps);
 		}
 		return listObjects;
 	}
 
-	public T findEntityById(String id) {
+	public List<T> findAll(Connection cn, String sortBy) {
+		List<T> listObjects = new ArrayList<>();
+		PreparedStatement ps = null;
+		try {
+			ps = cn.prepareStatement(getQueryAll() + sortBy);
+			ResultSet resultSet = ps.executeQuery();
+			while (resultSet.next()) {
+				T entity = createObject(resultSet);
+				listObjects.add(entity);
+			}
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+		} finally {
+			close(ps);
+		}
+		return listObjects;
+	}
+
+	public T findEntityById(Connection cn, String id) {
 		T entity = null;
 		PreparedStatement ps = null;
 		try {
-			ps = getQueryById(id);
+			ps = cn.prepareStatement(getQueryById());
+			ps.setString(1, id);
 			ResultSet resultSet = ps.executeQuery();
 
 			while (resultSet.next()) {
 				entity = createObject(resultSet);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} finally {
 			close(ps);
 		}
 		return entity;
 	}
 
-	public void updateStatus(String id, String status) {
+	public boolean updateStatus(Connection cn, String id, String status) {
 		PreparedStatement ps = null;
+		Boolean flag = false;
 		try {
-			ps = getQueryUpdateStatus(id, status);
-			ps.executeUpdate();
+			ps = cn.prepareStatement(getQueryUpdateStatus());
+			ps.setString(1, status);
+			ps.setString(2, id);
+			int row = ps.executeUpdate();
+			if (row>=1) {
+				flag = true;
+			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(ps);
-		}
-
-	}
-
-	public boolean add(T entity) {
-
-		PreparedStatement ps = null;
-		boolean flag = false;
-		try {
-			ps = getQueryAdd(entity);
-			ps.executeUpdate();
-			flag = true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} finally {
 			close(ps);
 		}
 		return flag;
 	}
 
-	public abstract PreparedStatement getQueryAdd(T entity);
+	public boolean add(Connection cn, T entity) {
+		PreparedStatement ps = null;
+		Boolean flag = false;
+		try {
+			ps = cn.prepareStatement(getQueryAdd());
+			setInsertValues(ps, entity);
+			Integer row = ps.executeUpdate();
+			if (row.equals(1)) {
+				flag = true;
+			}
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+		} finally {
+			close(ps);
+		}
+		return flag;
+	}
+
+	public abstract PreparedStatement setInsertValues(PreparedStatement ps, T entity);
+
+	public abstract String getQueryAdd();
 
 	public abstract T createObject(ResultSet resultSet);
 
-	public abstract PreparedStatement getQueryUpdateStatus(String id, String status);
+	public abstract T createObjectLazyInit(ResultSet resultSet);
 
-	public abstract PreparedStatement getQueryAll(String sortBy);
+	public abstract String getQueryUpdateStatus();
 
-	public abstract PreparedStatement getQueryById(String id);
+	public abstract String getQueryAll();
+
+	public abstract String getQueryAllLazy();
+
+	public abstract String getQueryById();
 
 	public void close(PreparedStatement st) {
 		try {
@@ -99,9 +131,8 @@ public abstract class AbstractDAO<T extends Model> {
 				st.close();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 	}
 
-	
 }

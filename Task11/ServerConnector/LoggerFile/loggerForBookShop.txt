@@ -69,3 +69,4 @@
 2016-12-05 11:44:37,089 (ClientThread.java:run:63) Connection reset 
 2016-12-05 13:19:46,510 (ClientThread.java:run:53) Connection reset 
 2016-12-05 13:21:52,502 (ClientThread.java:run:53) Connection reset 
+2017-01-28 22:07:07,445 (ClientThread.java:run:55) Connection reset 

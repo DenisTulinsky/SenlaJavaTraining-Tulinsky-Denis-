@@ -6,8 +6,9 @@ import com.senla.training.annotations.Printable;
 import com.senla.training.annotations.PrintableObject;
 import com.senla.training.interfaces.IPreorder;
 import com.senla.training.tools.Status;
+
 @PrintableObject(name = "Preorder")
-public class Preorder extends Model implements IPreorder,Serializable {
+public class Preorder extends Model implements IPreorder, Serializable {
 
 	/**
 	 * 
@@ -16,30 +17,23 @@ public class Preorder extends Model implements IPreorder,Serializable {
 	/**
 	 * 
 	 */
-	@Printable(name = "id",order = 1)
+	@Printable(name = "id", order = 1)
 	private String id;
-	
-	@Printable(name = "title",order = 2)
+
+	@Printable(name = "title", order = 2)
 	private String title;
-	
-	@Printable(name = "author",order = 3)
+
+	@Printable(name = "author", order = 3)
 	private String author;
-	
-	@Printable(name = "count",order = 4)
+
+	@Printable(name = "count", order = 4)
 	private Integer count;
-	
-	@Printable(name = "status",order = 5)
+
+	@Printable(name = "status", order = 5)
 	private Status status;
 
-	public Preorder(String title, String author) {
-		this.setTitle(title);
-		this.setAuthor(author);
-		
-	}
-
-	public Preorder(String preorderstring) {
-
-	}
+	@Printable(name = "bookID", order = 6)
+	private String bookId;
 
 	public Status getStatus() {
 		return status;
@@ -73,7 +67,9 @@ public class Preorder extends Model implements IPreorder,Serializable {
 		this.count = count;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -82,11 +78,13 @@ public class Preorder extends Model implements IPreorder,Serializable {
 		int result = 1;
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		
+
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -103,13 +101,13 @@ public class Preorder extends Model implements IPreorder,Serializable {
 				return false;
 		} else if (!author.equals(other.author))
 			return false;
-		
+
 		if (title == null) {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
-				
+
 		return true;
 	}
 
@@ -121,6 +119,12 @@ public class Preorder extends Model implements IPreorder,Serializable {
 		this.id = id;
 	}
 
+	public String getBookId() {
+		return bookId;
+	}
 
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
 
 }

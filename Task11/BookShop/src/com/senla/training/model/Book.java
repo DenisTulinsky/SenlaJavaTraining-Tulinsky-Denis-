@@ -7,9 +7,10 @@ import com.senla.training.annotations.Printable;
 import com.senla.training.annotations.PrintableObject;
 import com.senla.training.interfaces.IBook;
 import com.senla.training.tools.Status;
+
 @PrintableObject(name = "Book")
 public class Book extends Model implements IBook, Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -17,26 +18,26 @@ public class Book extends Model implements IBook, Serializable {
 	/**
 	 * 
 	 */
-	@Printable(name = "id",order = 1)
+	@Printable(name = "id", order = 1)
 	private String id;
-	@Printable(name = "title",order = 2)
+	@Printable(name = "title", order = 2)
 	private String title;
-	@Printable(name = "author",order = 3)
+	@Printable(name = "author", order = 3)
 	private String author;
-	@Printable(name = "publishedDate",order = 4)
+	@Printable(name = "publishedDate", order = 4)
 	private Date publishedDate;
-	@Printable(name = "inStock",order = 5)
+	@Printable(name = "inStock", order = 5)
 	private Status inStock;
-	@Printable(name = "price",order = 6)
+	@Printable(name = "price", order = 6)
 	private Integer price;
-	@Printable(name = "arrivalDate",order = 7)
+	@Printable(name = "arrivalDate", order = 7)
 	private Date arrivalDate;
-	@Printable(name = "description",order = 8)
+	@Printable(name = "description", order = 8)
 	private String description;
 
-	public Book(String title, String author, Date publishedDate, Status inStock, Integer price, Date arrivalDate,
-			String description) {
-
+	public Book(String id, String title, String author, Date publishedDate, Status inStock, Integer price,
+			Date arrivalDate, String description) {
+		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.publishedDate = publishedDate;
@@ -46,17 +47,12 @@ public class Book extends Model implements IBook, Serializable {
 		this.description = description;
 	}
 
-	public Book(String bookString) {
-
-	}
-
 	public Book(String title, String author) {
 		this.title = title;
 		this.author = author;
 	}
 
 	public Book() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -136,9 +132,5 @@ public class Book extends Model implements IBook, Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	
-
-	
 
 }

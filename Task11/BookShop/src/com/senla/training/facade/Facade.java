@@ -1,39 +1,30 @@
 package com.senla.training.facade;
 
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.senla.training.DI.DI;
-import com.senla.training.comparators.BookByArrivalDate;
-import com.senla.training.comparators.BookByPriceComparator;
-import com.senla.training.comparators.OrderByDateComp;
-import com.senla.training.comparators.OrderByPriceComp;
-import com.senla.training.comparators.PreordersByNumberComp;
-import com.senla.training.comparators.PreordersByTitleComp;
-import com.senla.training.interfaces.IBook;
+import com.senla.training.dao.BookDAO;
+import com.senla.training.dao.OrderDAO;
+import com.senla.training.dao.PreorderDAO;
 import com.senla.training.interfaces.IBookService;
 import com.senla.training.interfaces.ICSVFileWorker;
 import com.senla.training.interfaces.IConverter;
 import com.senla.training.interfaces.IConverterReadableString;
 import com.senla.training.interfaces.IFacade;
-import com.senla.training.interfaces.IOrder;
 import com.senla.training.interfaces.IOrderService;
-import com.senla.training.interfaces.IPreorder;
 import com.senla.training.interfaces.IPreorderService;
-import com.senla.training.interfaces.ISerializationUtility;
-import com.senla.training.interfaces.IStorage;
 import com.senla.training.model.Book;
 import com.senla.training.model.Order;
+import com.senla.training.properties.PropertyFactory;
 import com.senla.training.tools.ObjectCreator;
-import com.senla.training.tools.SerializationUtility;
 import com.senla.training.tools.Status;
 
 public class Facade implements IFacade {
-	private IStorage storage;
+
 	private IBookService bservice;
 	private ICSVFileWorker fw;
 	private IConverterReadableString converterReadableString;
@@ -41,20 +32,21 @@ public class Facade implements IFacade {
 	private IPreorderService preodservice;
 	private IOrderService orderservice;
 	private final org.apache.log4j.Logger log = Logger.getLogger(Facade.class);
-	private ISerializationUtility serializationUtil;
+
+	private BookDAO bookDao;
+	private PreorderDAO preorderDao;
+	private OrderDAO orderDao;
 
 	@Override
 	public void init() {
-		serializationUtil = new SerializationUtility();
-		storage = serializationUtil.deserialize();
-		if (storage == null) {
-			storage = (IStorage) DI.load(IStorage.class);
-		}
+		bookDao = new BookDAO();
+		orderDao = new OrderDAO();
+		preorderDao = new PreorderDAO();
 		converterReadableString = (IConverterReadableString) DI.load(IConverterReadableString.class);
-		bservice = (IBookService) DI.load(IBookService.class, storage, converterReadableString);
-		preodservice = (IPreorderService) DI.load(IPreorderService.class, storage, converterReadableString);
-		orderservice = (IOrderService) DI.load(IOrderService.class, storage, converterReadableString);
-		converter = (IConverter) DI.load(IConverter.class, storage);
+		bservice = (IBookService) DI.load(IBookService.class, converterReadableString, bookDao);
+		preodservice = (IPreorderService) DI.load(IPreorderService.class, converterReadableString, preorderDao);
+		orderservice = (IOrderService) DI.load(IOrderService.class, converterReadableString, orderDao);
+		converter = (IConverter) DI.load(IConverter.class);
 		fw = (ICSVFileWorker) DI.load(ICSVFileWorker.class, converter);
 
 	}
@@ -62,33 +54,31 @@ public class Facade implements IFacade {
 	@Override
 	public Boolean addBook(String title, String author, GregorianCalendar publishedDate, Status status, Integer price,
 			GregorianCalendar arrivalDate, String description) {
+		Boolean flag = false;
 		try {
-			bservice.addBook((Book)ObjectCreator.createBook(title, 
-					author, publishedDate, status, price, arrivalDate, description));
-			//if (Boolean.valueOf(PropertyFactory.getProps().getValue("executePreorders"))) {
-				//preodservice.checkPreorders(title, author);
-			//}
+			Book book = (Book) ObjectCreator.createBook(title, author, publishedDate, status, price, arrivalDate,
+					description);
+			flag = bservice.addBook(book);
+
+			if (Boolean.valueOf(PropertyFactory.getProps().getValue("executePreorders"))) {
+				preodservice.checkPreorders(book.getId());
+			}
+
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return false;
 		}
-		return true;
+		return flag;
 	}
-	
+
 	@Override
 	public Boolean removeBook(String id) {
-		try {
-			bservice.removeBook(id);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+		return bservice.removeBook(id);
 	}
 
 	@Override
 	public List<String> showAllBooksSortByTitle() {
-		
+
 		String sortBy = "title";
 		return bservice.showAllBooks(sortBy);
 	}
@@ -113,133 +103,85 @@ public class Facade implements IFacade {
 	}
 
 	public List<String> showUnwantedBooksByArrDate() {
-		Comparator<IBook> byArrDate = new BookByArrivalDate();
-		return bservice.showUnwantedBooks(byArrDate);
+		String sortBy = "arrival_date";
+		return bservice.showUnwantedBooks(sortBy);
 	}
 
 	public List<String> showUnwantedBooksByPrice() {
-		Comparator<IBook> byPrice = new BookByPriceComparator();
-		return bservice.showUnwantedBooks(byPrice);
+		String sortBy = "price";
+		return bservice.showUnwantedBooks(sortBy);
 	}
 
 	@Override
 	public Boolean writeBooksToCsv() {
-		try {
-			fw.writeBooksToCsv(storage);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+		return fw.writeBooksToCsv(bookDao);
 	}
 
 	@Override
 	public Boolean readBooksFromCsv() {
-		try {
-			fw.readBooksFromCsv(storage);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+		return fw.readBooksFromCsv(bookDao);
 	}
 
 	@Override
 	public Boolean writeOrdersToCsv() {
-		try {
-			fw.writeOrdersToCsv(storage);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+		return fw.writeOrdersToCsv(orderDao);
 	}
 
 	@Override
 	public Boolean readOrdersFromCsv() {
-		try {
-			fw.readOrdersFromCsv(storage);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+		return fw.readOrdersFromCsv(orderDao);
 	}
 
 	@Override
 	public Boolean writePreordersToCsv() {
-		try {
-			fw.writePreordersToCsv(storage);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+		return fw.writePreordersToCsv(preorderDao);
 	}
 
 	@Override
 	public Boolean readPreordersFromCsv() {
-		try {
-			fw.readPreordersFromCsv(storage);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+		return fw.readPreordersFromCsv(preorderDao);
 	}
 
-	public Boolean addPreorder(String title, String author) {
+	public Boolean addPreorder(String bookId) {
+		Boolean flag = false;
 		try {
-			preodservice.addPreorder(ObjectCreator.createPreorder(title, author));
+			flag = preodservice.addPreorder(ObjectCreator.createPreorder(bookId));
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return false;
 		}
-		return true;
+		return flag;
 	}
 
 	public Boolean addOrder(String customer, Calendar executiondate, String bookid) {
+		Boolean flag = false;
 		try {
-			orderservice.addOrder((Order) ObjectCreator.createOrder(customer, executiondate), bookid);
+			flag = orderservice.addOrder((Order) ObjectCreator.createOrder(customer, executiondate, bookid));
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return false;
 		}
-		return true;
-
+		return flag;
 	}
 
 	public Boolean cancelOrder(String id) {
-		try {
-			orderservice.cancelOrder(id);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
-
+		return orderservice.cancelOrder(id);
 	}
 
 	public Boolean executeOrder(String id) {
-		try {
-			orderservice.executeOrder(id);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+		return orderservice.executeOrder(id);
 
 	}
 
 	public List<String> showExecOrdersByPeriodSortByDate(Calendar calendar1, Calendar calendar2) {
-		Comparator<IOrder> ByDate = new OrderByDateComp();
-		return orderservice.showExecOrdersByPeriod(calendar1, calendar2, ByDate);
+		String sortBy = "exec_date";
+		return orderservice.showExecOrdersByPeriod(calendar1, calendar2, sortBy);
 
 	}
 
-	public List<String> showExecOrdersByPeriodSortByPrice(Calendar c1, Calendar c5) {
-		Comparator<IOrder> ByPrice = new OrderByPriceComp();
-		return orderservice.showExecOrdersByPeriod(c1, c5, ByPrice);
+	public List<String> showExecOrdersByPeriodSortByPrice(Calendar calendar1, Calendar calendar2) {
+		String sortBy = "price";
+		return orderservice.showExecOrdersByPeriod(calendar1, calendar2, sortBy);
 
 	}
 
@@ -280,36 +222,19 @@ public class Facade implements IFacade {
 	}
 
 	public List<String> showPreordersByBook() {
-		Comparator<IPreorder> byTitle = new PreordersByTitleComp();
-		return preodservice.showAllPreorders(byTitle);
+		String sortBy = "title";
+		return preodservice.showAllPreorders(sortBy);
 	}
 
+	///
 	public List<String> showPreordersByNumber() {
-		Comparator<IPreorder> byNumber = new PreordersByNumberComp();
-		return preodservice.showAllPreorders(byNumber);
+		String sortBy = "count";
+		return preodservice.showAllPreorders(sortBy);
 
 	}
 
 	@Override
-	public Boolean cloneOrder(String title, String customer) {
-		try {
-			orderservice.cloneOrder(title, customer);
-
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public Boolean serialize() {
-		try {
-			serializationUtil.serialize(storage);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return false;
-		}
-		return true;
+	public Boolean cloneOrder(String id) {
+		return orderservice.cloneOrder(id);
 	}
 }
