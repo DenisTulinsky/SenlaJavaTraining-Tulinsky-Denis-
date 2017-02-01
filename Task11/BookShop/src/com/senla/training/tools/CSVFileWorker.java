@@ -1,152 +1,165 @@
 package com.senla.training.tools;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.senla.training.DI.DI;
-import com.senla.training.interfaces.IBook;
-import com.senla.training.interfaces.IConverter;
+import com.senla.training.connection.ConnectorDB;
+import com.senla.training.dao.BookDAO;
+import com.senla.training.dao.OrderDAO;
+import com.senla.training.dao.PreorderDAO;
 import com.senla.training.interfaces.ICSVFileWorker;
 import com.senla.training.interfaces.ICSVUtility;
-import com.senla.training.interfaces.IOrder;
-import com.senla.training.interfaces.IPreorder;
-import com.senla.training.interfaces.IStorage;
+import com.senla.training.interfaces.IConverter;
+import com.senla.training.model.Book;
+import com.senla.training.model.Order;
+import com.senla.training.model.Preorder;
 
 public class CSVFileWorker implements ICSVFileWorker {
 
 	private IConverter converter;
 	private final Logger log = Logger.getLogger(CSVFileWorker.class);
-	
 
-	public CSVFileWorker(IConverter converter ) {
+	public CSVFileWorker(IConverter converter) {
 		this.converter = converter;
-		
+
 	}
 
 	@Override
-	public void writeBooksToCsv(IStorage storage) {
-		ICSVUtility csvUtil =(ICSVUtility) DI.load(ICSVUtility.class,"Resources/Books.csv");// new CSVUtility("Resources/Books.csv");
-
+	public boolean writeBooksToCsv(BookDAO bookDao) {
+		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class, "Resources/Books.csv");
 		try {
-			List<IBook> allBooks = storage.getAllBooks();
+			Connection cn = ConnectorDB.getInstance().getConnection();
+			List<Book> allBooks = bookDao.findAll(cn, "title");
 			List<String> strBooks = new ArrayList<String>();
-			for (IBook book : allBooks) {
+			for (Book book : allBooks) {
 				strBooks.add(converter.bookToString(book));
 			}
-
 			csvUtil.writeToCsv(strBooks);
 
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());
+			return false;
 
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			return false;
 		}
+		return true;
 
 	}
 
-	public void writeOrdersToCsv(IStorage storage) {
-
-		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class,"Resources/Orders.csv");
+	public boolean writeOrdersToCsv(OrderDAO orderDao) {
+		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class, "Resources/Orders.csv");
 		try {
-			List<IOrder> allOrders = storage.getAllOrders();
+
+			Connection cn = ConnectorDB.getInstance().getConnection();
+			List<Order> allOrders = orderDao.findAllLazy(cn, "exec_date");
 			List<String> strOrders = new ArrayList<String>();
-			for (IOrder order : allOrders) {
+			for (Order order : allOrders) {
 				strOrders.add(converter.orderToString(order));
 			}
-
 			csvUtil.writeToCsv(strOrders);
+
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());
+			return false;
 
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			return false;
 		}
+		return true;
 	}
 
-	public void writePreordersToCsv(IStorage storage) {
-		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class,"Resources/Preorders.csv");;
+	public boolean writePreordersToCsv(PreorderDAO preorderDao) {
+		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class, "Resources/Preorders.csv");
 		try {
-
-			List<IPreorder> allPreorders = storage.getAllPreorders();
+			Connection cn = ConnectorDB.getInstance().getConnection();
+			List<Preorder> allPreorders = preorderDao.findAll(cn, "title");
 			List<String> strPreorders = new ArrayList<String>();
-			for (IPreorder preorder : allPreorders) {
+			for (Preorder preorder : allPreorders) {
 				strPreorders.add(converter.preorderToString(preorder));
 			}
-
 			csvUtil.writeToCsv(strPreorders);
-
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());
+			return false;
 
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			return false;
 		}
+		return true;
 	}
 
 	@Override
-	public void readBooksFromCsv(IStorage storage) {
-		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class,"Resources/Books.csv");
-
+	public boolean readBooksFromCsv(BookDAO bookDao) {
+		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class, "Resources/Books.csv");
+		Connection cn = ConnectorDB.getInstance().getConnection();
+		Boolean flag = false;
 		try {
-
 			List<String> strBooks = csvUtil.readFromCsv();
-
 			for (String str : strBooks) {
-				IBook book = converter.stringToBook(str);
-				storage.addBook(book);
+				Book book = (Book) converter.stringToBook(str);
+				flag = bookDao.add(cn, book);
 
 			}
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());
+			flag = false;
 
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			flag = false;
 		}
+		return flag;
 	}
 
 	@Override
-	public void readPreordersFromCsv(IStorage storage) {
-		ICSVUtility csvUtil =(ICSVUtility) DI.load(ICSVUtility.class,"Resources/Preorders.csv");
+	public boolean readPreordersFromCsv(PreorderDAO preorderDao) {
+		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class, "Resources/Preorders.csv");
+		Connection cn = ConnectorDB.getInstance().getConnection();
+		Boolean flag = false;
 		try {
-
 			List<String> strPreorders = csvUtil.readFromCsv();
-
 			for (String str : strPreorders) {
-				IPreorder preorder = converter.stringToPreorder(str);
-				storage.addPreorder(preorder);
+				Preorder preorder = (Preorder) converter.stringToPreorder(str);
+				flag = preorderDao.add(cn, preorder);
 
 			}
-
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());
-
+			flag = false;
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			flag = false;
 		}
+		return flag;
 	}
 
 	@Override
-	public void readOrdersFromCsv(IStorage storage) {
-		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class,"Resources/Orders.csv");
-
+	public boolean readOrdersFromCsv(OrderDAO orderDao) {
+		ICSVUtility csvUtil = (ICSVUtility) DI.load(ICSVUtility.class, "Resources/Orders.csv");
+		Connection cn = ConnectorDB.getInstance().getConnection();
+		Boolean flag = false;
 		try {
-
 			List<String> strOrders = csvUtil.readFromCsv();
-
 			for (String str : strOrders) {
-				IOrder order = converter.stringToOrder(str);
-				storage.addOrder(order);
-
+				Order order = (Order) converter.stringToOrder(str);
+				flag = orderDao.add(cn, order);
 			}
-
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage());
+			flag = false;
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			flag = false;
 		}
+		return flag;
 
 	}
 }

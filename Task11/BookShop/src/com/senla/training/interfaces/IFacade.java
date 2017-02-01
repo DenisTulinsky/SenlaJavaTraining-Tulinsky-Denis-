@@ -32,7 +32,7 @@ public interface IFacade {
 
 	public Boolean readPreordersFromCsv();
 
-	public Boolean addPreorder(String title, String author);
+	public Boolean addPreorder(String bookId);
 
 	public Boolean addOrder( String customer, Calendar executiondate, String title);
 
@@ -68,8 +68,6 @@ public interface IFacade {
 
 	public List<String> showPreordersByNumber();
 
-	public Boolean cloneOrder(String title, String customer);
-
-	public Boolean serialize();
+	public Boolean cloneOrder(String id);
 
 }

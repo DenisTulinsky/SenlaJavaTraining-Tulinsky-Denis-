@@ -29,4 +29,7 @@ public interface IPreorder extends Serializable {
 	public int hashCode();
 
 	public boolean equals(Object obj);
+	public String getBookId();
+
+	public void setBookId(String string);
 }

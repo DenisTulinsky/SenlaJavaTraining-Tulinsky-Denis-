@@ -21,4 +21,6 @@ public interface IOrder extends Serializable {
 	public String getId();
 	public void setId(String id);
 	public IOrder clone() throws CloneNotSupportedException;
+	public String getBookId();
+	public void setBookId(String id);
 }

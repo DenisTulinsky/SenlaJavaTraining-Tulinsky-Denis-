@@ -1,19 +1,18 @@
 package com.senla.training.interfaces;
 
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.List;
 
 import com.senla.training.model.Order;
 
 public interface IOrderService {
-	public void addOrder(Order order, String title);
+	public boolean addOrder(Order order);
 
-	public void cancelOrder(String id);
+	public boolean cancelOrder(String id);
 
-	public void executeOrder(String id);
+	public boolean executeOrder(String id);
 
-	public List<String> showExecOrdersByPeriod(Calendar cal3, Calendar cal4, Comparator<IOrder> com);
+	public List<String> showExecOrdersByPeriod(Calendar cal3, Calendar cal4, String sortBy);
 
 	public List<String> showAllOrders(String sortBy);
 
@@ -23,7 +22,7 @@ public interface IOrderService {
 
 	public List<String> viewOrderDetail(String id);
 
-	public void cloneOrder(String title, String customer);
+	public boolean cloneOrder(String id);
 
 
 }
