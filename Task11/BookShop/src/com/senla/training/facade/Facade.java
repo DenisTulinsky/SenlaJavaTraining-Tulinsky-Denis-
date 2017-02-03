@@ -1,5 +1,6 @@
 package com.senla.training.facade;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -235,6 +236,13 @@ public class Facade implements IFacade {
 
 	@Override
 	public Boolean cloneOrder(String id) {
-		return orderservice.cloneOrder(id);
+		Boolean cloned = false;
+		try {
+			cloned = orderservice.cloneOrder(id);
+		} catch (SQLException e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+		}
+		return cloned;
 	}
 }

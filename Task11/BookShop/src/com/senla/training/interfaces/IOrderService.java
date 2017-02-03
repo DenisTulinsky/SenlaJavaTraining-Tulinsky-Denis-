@@ -1,5 +1,6 @@
 package com.senla.training.interfaces;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface IOrderService {
 
 	public List<String> viewOrderDetail(String id);
 
-	public boolean cloneOrder(String id);
+	public boolean cloneOrder(String id) throws SQLException;
 
 
 }

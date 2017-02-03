@@ -169,22 +169,18 @@ public class OrderDAO extends AbstractDAO<Order> {
 		boolean flag = false;
 		PreparedStatement ps = null;
 		try {
-			cn.setAutoCommit(false);
 			ps = cn.prepareStatement(
 					INSERT_INTO_ORDERS_ID_BOOK_ID_CUSTOMER_PRICE_EXEC_DATE_STATUS_SELECT_BOOK_ID_CUSTOMER_PRICE_EXEC_DATE_STATUS_FROM_ORDERS_WHERE_ID);
 			ps.setString(1, UUID.randomUUID().toString());
 			ps.setString(2, orderId);
 			Integer row = ps.executeUpdate();
-			cn.commit();
 			if (row.equals(1)) {
 				flag = true;
 			}
 		} catch (SQLException e) {
 			log.error(e.getMessage());
-			cn.rollback();
 		} finally {
 			close(ps);
-			cn.setAutoCommit(true);
 		}
 		return flag;
 
