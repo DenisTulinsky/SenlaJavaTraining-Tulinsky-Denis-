@@ -24,13 +24,13 @@ public class OrderService implements IOrderService {
 	private OrderDAO orderDao;
 
 	public OrderService(IConverterReadableString converterToString, OrderDAO orderDao) {
-		this.converterToString = converterToString; 
+		this.converterToString = converterToString;
 		this.orderDao = orderDao;
 	}
 
 	@Override
 	public synchronized boolean addOrder(Order order) {
-		
+
 		order.setId(UUID.randomUUID().toString());
 		order.setStatus(Status.ACTIVE);
 		order.setPrice(1 + (int) (Math.random() * 20));
@@ -110,20 +110,26 @@ public class OrderService implements IOrderService {
 	 * 
 	 * Searches for the order to clone by book title and customer. Clones order
 	 * and modifies id. Adds the cloned order to storage
+	 * 
+	 * @throws SQLException
 	 *
 	 */
 	@Override
-	public synchronized boolean cloneOrder(String id) {
+	public synchronized boolean cloneOrder(String id) throws SQLException {
 		Connection cn = ConnectorDB.getInstance().getConnection();
-		Boolean flag = null;
+		Boolean flag = false;
 		try {
-			flag =  orderDao.cloneOrder(cn, id);
-
+			cn.setAutoCommit(false);
+			flag = orderDao.cloneOrder(cn, id);
+			cn.commit();
 		} catch (SQLException e) {
 			log.error(e.getMessage());
+			cn.rollback();
 			flag = false;
+		} finally {
+			cn.setAutoCommit(true);
 		}
 		return flag;
-		
+
 	}
 }
