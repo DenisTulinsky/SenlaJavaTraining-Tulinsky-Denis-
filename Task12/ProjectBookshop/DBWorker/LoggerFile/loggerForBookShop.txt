@@ -1,0 +1,71 @@
+
+2016-11-30 01:11:50,600 (SerializationUtility.java:deserialize:53) invalid stream header: 68766C68 
+2016-11-30 01:25:10,184 (SerializationUtility.java:deserialize:53) invalid stream header: 6A766979 
+2016-11-30 01:26:11,500 (SerializationUtility.java:deserialize:53) invalid stream header: 6A766979 
+2016-11-30 01:27:14,091 (SerializationUtility.java:deserialize:53) invalid stream header: 6A766979 
+2016-11-30 01:27:39,912 (SerializationUtility.java:deserialize:53) invalid stream header: 6A766979 
+2016-11-30 01:28:33,307 (SerializationUtility.java:deserialize:53)  
+2016-11-30 01:29:05,287 (SerializationUtility.java:deserialize:53)  
+2016-11-30 01:29:32,949 (SerializationUtility.java:deserialize:53)  
+2016-11-30 02:25:18,057 (SerializationUtility.java:deserialize:53)  
+2016-11-30 02:33:51,072 (SerializationUtility.java:deserialize:53)  
+2016-11-30 03:16:19,023 (SerializationUtility.java:deserialize:53)  
+2016-11-30 03:16:31,796 (SerializationUtility.java:deserialize:53)  
+2016-11-30 03:19:07,149 (SerializationUtility.java:deserialize:53)  
+2016-11-30 17:42:06,333 (SerializationUtility.java:deserialize:53)  
+2016-11-30 17:43:47,806 (SerializationUtility.java:deserialize:53)  
+2016-11-30 17:45:40,505 (SerializationUtility.java:deserialize:53)  
+2016-11-30 17:53:00,687 (SerializationUtility.java:deserialize:53)  
+2016-11-30 18:07:35,133 (SerializationUtility.java:deserialize:53)  
+2016-11-30 18:12:46,758 (SerializationUtility.java:deserialize:53)  
+2016-11-30 18:28:37,072 (SerializationUtility.java:deserialize:53)  
+2016-11-30 18:43:39,251 (SerializationUtility.java:deserialize:53)  
+2016-11-30 18:46:15,741 (SerializationUtility.java:deserialize:53)  
+2016-11-30 18:48:23,432 (SerializationUtility.java:deserialize:53)  
+2016-11-30 19:01:55,883 (SerializationUtility.java:deserialize:53)  
+2016-11-30 19:05:08,467 (SerializationUtility.java:deserialize:53)  
+2016-11-30 19:16:27,934 (SerializationUtility.java:deserialize:53)  
+2016-11-30 19:20:33,875 (SerializationUtility.java:deserialize:53)  
+2016-11-30 19:23:21,276 (SerializationUtility.java:deserialize:53)  
+2016-11-30 20:05:49,512 (SerializationUtility.java:deserialize:53)  
+2016-11-30 20:05:51,411 (SerializationUtility.java:deserialize:53)  
+2016-11-30 20:06:11,499 (SerializationUtility.java:deserialize:53)  
+2016-11-30 20:06:27,095 (SerializationUtility.java:deserialize:53)  
+2016-11-30 20:06:33,794 (SerializationUtility.java:deserialize:53)  
+2016-11-30 23:17:07,505 (SerializationUtility.java:deserialize:53)  
+2016-11-30 23:17:17,384 (SerializationUtility.java:deserialize:53)  
+2016-11-30 23:21:24,255 (SerializationUtility.java:deserialize:53)  
+2016-11-30 23:36:08,765 (SerializationUtility.java:deserialize:53)  
+2016-11-30 23:40:29,356 (SerializationUtility.java:deserialize:53)  
+2016-11-30 23:43:27,367 (SerializationUtility.java:deserialize:53)  
+2016-11-30 23:43:45,650 (SerializationUtility.java:deserialize:53)  
+2016-11-30 23:44:19,114 (SerializationUtility.java:deserialize:53)  
+2016-12-01 00:16:33,655 (SerializationUtility.java:deserialize:53)  
+2016-12-01 05:15:13,517 (SerializationUtility.java:deserialize:53)  
+2016-12-01 05:50:04,584 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:00:35,054 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:17:00,753 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:17:05,595 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:21:14,697 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:23:11,104 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:24:57,890 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:35:55,607 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:42:23,749 (SerializationUtility.java:deserialize:53)  
+2016-12-01 06:55:45,952 (SerializationUtility.java:deserialize:53)  
+2016-12-01 13:22:55,046 (SerializationUtility.java:deserialize:53)  
+2016-12-01 13:24:07,842 (MethodInvoker.java:implement:40) wrong number of arguments 
+2016-12-01 13:24:07,966 (ClientThread.java:run:45) Connection reset 
+2016-12-01 13:40:46,950 (SerializationUtility.java:deserialize:53)  
+2016-12-01 14:33:12,982 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
+2016-12-01 14:34:55,811 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
+2016-12-01 14:44:24,956 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
+2016-12-01 14:45:05,347 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
+2016-12-01 14:47:54,667 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
+2016-12-05 11:33:22,162 (ClientThread.java:run:63) Connection reset 
+2016-12-05 11:33:36,992 (ClientThread.java:run:63) writing aborted; java.io.NotSerializableException: com.senla.training.requestApi.Request 
+2016-12-05 11:38:47,958 (ClientThread.java:run:63) Connection reset 
+2016-12-05 11:44:18,963 (ServerConnector.java:<init>:31) Address already in use: JVM_Bind 
+2016-12-05 11:44:37,074 (MethodInvoker.java:invoke:71) wrong number of arguments 
+2016-12-05 11:44:37,089 (ClientThread.java:run:63) Connection reset 
+2016-12-05 13:19:46,510 (ClientThread.java:run:53) Connection reset 
+2016-12-05 13:21:52,502 (ClientThread.java:run:53) Connection reset 
