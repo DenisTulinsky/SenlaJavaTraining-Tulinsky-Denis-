@@ -1,0 +1,33 @@
+
+2016-11-30 01:11:50,600 (SerializationUtility.java:deserialize:53) invalid stream header: 68766C68 
+2016-11-30 01:25:10,184 (SerializationUtility.java:deserialize:53) invalid stream header: 6A766979 
+2016-11-30 01:26:11,500 (SerializationUtility.java:deserialize:53) invalid stream header: 6A766979 
+2016-11-30 01:27:14,091 (SerializationUtility.java:deserialize:53) invalid stream header: 6A766979 
+2016-11-30 01:27:39,912 (SerializationUtility.java:deserialize:53) invalid stream header: 6A766979 
+2016-11-30 01:28:33,307 (SerializationUtility.java:deserialize:53)  
+2016-11-30 01:29:05,287 (SerializationUtility.java:deserialize:53)  
+2016-11-30 01:29:32,949 (SerializationUtility.java:deserialize:53)  
+2016-11-30 02:25:18,057 (SerializationUtility.java:deserialize:53)  
+2016-11-30 02:33:51,072 (SerializationUtility.java:deserialize:53)  
+2016-11-30 03:16:19,023 (SerializationUtility.java:deserialize:53)  
+2016-11-30 03:16:31,796 (SerializationUtility.java:deserialize:53)  
+2016-11-30 03:19:07,149 (SerializationUtility.java:deserialize:53)  
+2017-01-30 23:50:25,970 (Facade.java:addOrder:193)  
+2017-01-31 02:40:51,958 (ConverterReadableString.java:convert:53)  
+2017-01-31 02:40:51,979 (ConverterReadableString.java:convert:53)  
+2017-01-31 20:31:39,913 (CSVFileWorker.java:writeBooksToCsv:53)  
+2017-01-31 20:40:51,890 (CSVUtility.java:writeToCsv:50) Resources\Books.csv (Процесс не может получить доступ к файлу, так как этот файл занят другим процессом) 
+2017-01-31 21:00:23,071 (CSVFileWorker.java:readBooksFromCsv:114) For input string: "2010-01-01" 
+2017-01-31 21:23:11,266 (CSVFileWorker.java:readBooksFromCsv:117) java.util.Date cannot be cast to java.sql.Timestamp 
+2017-01-31 21:40:14,739 (Converter.java:stringToOrder:86) For input string: "John Johnson" 
+2017-01-31 21:40:14,743 (CSVFileWorker.java:readOrdersFromCsv:157)  
+2017-02-01 00:24:06,628 (CSVUtility.java:writeToCsv:50) Resources\Orders.csv (Процесс не может получить доступ к файлу, так как этот файл занят другим процессом) 
+2017-02-01 02:28:23,819 (OrderDAO.java:cloneOrder:182) Duplicate entry '2' for key 'PRIMARY' 
+2017-02-01 03:33:35,375 (AbstractDAO.java:add:105) Duplicate entry '99cf16fc-6a63-4fe4-9c79-6785b7459539' for key 'PRIMARY' 
+2017-02-01 03:33:35,378 (Converter.java:stringToBook:57) Unparseable date: "10" 
+2017-02-01 03:33:35,379 (CSVFileWorker.java:readBooksFromCsv:106)  
+2017-02-01 03:47:13,838 (AbstractDAO.java:add:105) Duplicate entry '99cf16fc-6a63-4fe4-9c79-6785b7459539' for key 'PRIMARY' 
+2017-02-01 03:47:13,841 (Converter.java:stringToBook:57) Unparseable date: "10" 
+2017-02-01 03:47:13,842 (CSVFileWorker.java:readBooksFromCsv:116)  
+2017-02-01 03:48:36,226 (Converter.java:stringToOrder:85) 1 
+2017-02-01 03:48:36,251 (CSVFileWorker.java:readOrdersFromCsv:159)  
