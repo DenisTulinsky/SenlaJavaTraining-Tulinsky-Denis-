@@ -16,18 +16,10 @@
 	</properties>
 
 	<dependencies>
-		<!-- Hibernate annotation -->
-		<!-- https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations -->
-		<dependency>
-			<groupId>org.hibernate.common</groupId>
-			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>4.0.5.Final</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.5.6-Final</version>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.11.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>ProjectBookshop</groupId>
@@ -35,4 +27,22 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	<build>
+   <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+		<resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+      </resource>
+      </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
