@@ -166,7 +166,6 @@ public class OrderService implements IOrderService {
 			Session session = getSession();
 			trans = session.beginTransaction();
 			order = orderDao.findEntityById(session, id);
-			order.setBooks(order.getBooks());
 			orderDao.add(session, order.clone());
 			trans.commit();
 		} catch (HibernateException | CloneNotSupportedException e) {

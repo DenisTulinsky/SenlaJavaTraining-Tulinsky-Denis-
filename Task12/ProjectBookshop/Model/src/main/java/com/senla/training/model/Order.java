@@ -128,7 +128,6 @@ public class Order extends Model implements Cloneable, Serializable {
 		Iterator<Book> iterator = books.iterator();
 		while (iterator.hasNext()) {
 			Book book = iterator.next().clone();
-			book.setId(null);
 			clone.books.add(book);
 		}
 		return clone;
