@@ -85,3 +85,8 @@
 2017-02-16 03:07:49,492 (SqlExceptionHelper.java:logExceptions:146) Cannot delete or update a parent row: a foreign key constraint fails (`bookshop`.`books_orders`, CONSTRAINT `fk_book_id` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`)) 
 2017-02-16 03:07:49,505 (BookService.java:deleteBook:134) could not execute statement 
 2017-02-16 04:26:11,959 (OrderService.java:viewOrderDetail:156) org.hibernate.collection.internal.PersistentSet cannot be cast to java.util.List 
+2017-02-17 19:01:18,823 (OrderService.java:cloneOrder:174) object references an unsaved transient instance - save the transient instance before flushing: com.senla.training.model.Book 
+2017-02-17 19:03:48,564 (OrderService.java:cloneOrder:174) object references an unsaved transient instance - save the transient instance before flushing: com.senla.training.model.Book 
+2017-02-17 19:23:43,875 (OrderService.java:cloneOrder:174) object references an unsaved transient instance - save the transient instance before flushing: com.senla.training.model.Book 
+2017-02-17 19:25:58,350 (OrderService.java:cloneOrder:174) Found shared references to a collection: com.senla.training.model.Order.books 
+2017-02-21 17:44:08,626 (ConverterReadableString.java:convert:52) could not initialize proxy - no Session 
