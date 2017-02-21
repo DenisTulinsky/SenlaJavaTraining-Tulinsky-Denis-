@@ -1,13 +1,14 @@
 package com.senla.training.interfaces;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.senla.training.enums.Status;
-import com.senla.training.model.Book;
 
 public interface IBookService {
 
-	public boolean addBook(Book book);
+	public boolean addBook(String title, String author, GregorianCalendar publishedDate, Status status, Integer price,
+			GregorianCalendar arrivalDate, String description);
 
 	public boolean updateStatus(Integer id, Status status);
 
@@ -18,5 +19,11 @@ public interface IBookService {
 	public List<String> showUnwantedBooks(String sortBy);
 
 	 public Boolean deleteBook(Integer id);
+
+	boolean writeBooksToCsv();
+
+	boolean readBooksFromCsv();
+
+	
 
 }

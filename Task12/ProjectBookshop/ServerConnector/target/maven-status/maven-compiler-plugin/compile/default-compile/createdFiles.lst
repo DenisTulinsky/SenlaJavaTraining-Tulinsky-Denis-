@@ -1,0 +1,4 @@
+com\senla\training\serverTools\ServerConnector.class
+com\senla\training\serverTools\ClientThread.class
+com\senla\training\serverTools\IServerConnector.class
+com\senla\training\serverStart\StartServer.class

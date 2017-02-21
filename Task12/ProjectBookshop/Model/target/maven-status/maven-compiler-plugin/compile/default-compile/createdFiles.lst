@@ -1,0 +1,5 @@
+com\senla\training\model\Order.class
+com\senla\training\model\Model.class
+com\senla\training\model\Book.class
+com\senla\training\model\Preorder.class
+com\senla\training\enums\Status.class

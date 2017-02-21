@@ -10,30 +10,82 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.senla.training.annotationsWorker.AnnotationsWorker;
+import com.senla.training.dao.BookDAO;
 import com.senla.training.dao.OrderDAO;
 import com.senla.training.enums.Status;
 import com.senla.training.hibernateUtils.HibernateUtil;
+import com.senla.training.interfaces.IBookDAO;
 import com.senla.training.interfaces.IConverterReadableString;
+import com.senla.training.interfaces.IOrderDAO;
 import com.senla.training.interfaces.IOrderService;
 import com.senla.training.model.Order;
+import com.senla.training.tools.CSVUtility;
+import com.senla.training.tools.ConverterCSV;
+import com.senla.training.tools.ObjectCreator;
 
 public class OrderService implements IOrderService {
 
 	private IConverterReadableString converterToString;
 	private final Logger log = Logger.getLogger(OrderService.class);
-	private OrderDAO orderDao;
+	private IOrderDAO orderDao;
+	private IBookDAO bookDao;
+	private static final String RESOURCES_ORDERS_CSV = "src/main/resources/Orders.csv";
+	private static final String ID = "id";
 
-	public OrderService(IConverterReadableString converterToString, OrderDAO orderDao) {
+	public OrderService(IConverterReadableString converterToString, OrderDAO orderDao, BookDAO bookDao) {
 		this.converterToString = converterToString;
 		this.orderDao = orderDao;
+		this.bookDao = bookDao;
+
 	}
 
 	protected Session getSession() {
 		return HibernateUtil.getSession();
 	}
 
+	public boolean writeOrdersToCsv() {
+		Transaction trans = null;
+		try {
+			Session session = getSession();
+			trans = session.beginTransaction();
+			List<Order> allOrders = orderDao.findAll(session, ID);
+			List<String> strOrders = new ArrayList<String>();
+			for (Order order : allOrders) {
+				strOrders.add(ConverterCSV.orderToString(order));
+			}
+			CSVUtility.writeToCsv(strOrders, RESOURCES_ORDERS_CSV);
+			trans.commit();
+		} catch (HibernateException e) {
+			trans.rollback();
+			log.error(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
 	@Override
-	public synchronized boolean addOrder(Order order) {
+	public boolean readOrdersFromCsv() {
+		Transaction trans = null;
+		try {
+			Session session = getSession();
+			trans = session.beginTransaction();
+			List<String> strOrders = CSVUtility.readFromCsv(RESOURCES_ORDERS_CSV);
+			for (String o : strOrders) {
+				Order order = (Order) ConverterCSV.stringToOrder(bookDao, session, o);
+				orderDao.add(session, order);
+			}
+			trans.commit();
+		} catch (HibernateException e) {
+			trans.rollback();
+			log.error(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public synchronized boolean addOrder(String customer, Calendar executiondate, List<Integer> ids) {
+		Order order = ObjectCreator.createOrder(bookDao, customer, executiondate, ids);
 		Transaction trans = null;
 		try {
 			Session session = getSession();
@@ -75,7 +127,7 @@ public class OrderService implements IOrderService {
 			Session session = getSession();
 			trans = session.beginTransaction();
 			List<Order> allOrders = orderDao.findAll(session, sortBy);
-			
+
 			result = new ArrayList<>();
 			for (Order o : allOrders) {
 				result.add(converterToString.convert(o));
@@ -177,18 +229,18 @@ public class OrderService implements IOrderService {
 	}
 
 	@Override
-	public Boolean deleteOrder(Integer id) {
-			Transaction trans = null;
-			try {
-				Session session = getSession();
-				trans = session.beginTransaction();
-				orderDao.delete(session, id);
-				trans.commit();
-			} catch (HibernateException e) {
-				trans.rollback();
-				log.error(e.getMessage());
-				return false;
-			}
-			return true;
+	public boolean deleteOrder(Integer id) {
+		Transaction trans = null;
+		try {
+			Session session = getSession();
+			trans = session.beginTransaction();
+			orderDao.delete(session, id);
+			trans.commit();
+		} catch (HibernateException e) {
+			trans.rollback();
+			log.error(e.getMessage());
+			return false;
 		}
+		return true;
+	}
 }

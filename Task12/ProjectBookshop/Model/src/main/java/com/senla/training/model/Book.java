@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -71,13 +72,14 @@ public class Book extends Model implements Cloneable, Serializable {
 	@Printable(name = "description", order = 8)
 	private String description;
 
-	@OneToMany(mappedBy = "book", orphanRemoval = true)
-	@Cascade(value = { CascadeType.REMOVE, CascadeType.SAVE_UPDATE })
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "book", orphanRemoval = true)
+	@Cascade(value = {CascadeType.REMOVE})
 	private Set<Preorder> preorders = new HashSet<Preorder>();
 
-	@ManyToMany
+	
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "books_orders", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "order_id") })
+			@JoinColumn(name = "order_id")})
 	private Set<Order> orders = new HashSet<Order>();
 
 	public Book(String title, String author) {

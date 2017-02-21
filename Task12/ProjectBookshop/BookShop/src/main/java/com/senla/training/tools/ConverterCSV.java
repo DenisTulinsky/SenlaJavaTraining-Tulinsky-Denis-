@@ -10,34 +10,25 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import com.senla.training.dao.BookDAO;
 import com.senla.training.enums.Status;
-import com.senla.training.interfaces.IConverter;
+import com.senla.training.interfaces.IBookDAO;
 import com.senla.training.model.Book;
 import com.senla.training.model.Order;
 import com.senla.training.model.Preorder;
 
-public class ConverterCSV implements IConverter {
+public class ConverterCSV {
 
-	private final Logger log = Logger.getLogger(ConverterCSV.class);
-	private BookDAO bookDao;
+	private final static Logger log = Logger.getLogger(ConverterCSV.class);
 
-	public ConverterCSV(BookDAO bookDao) {
-		this.bookDao = bookDao;
-	}
-
-	@Override
-	public String bookToString(Book book) {
+	public static String bookToString(Book book) {
 		String str = new StringBuilder().append(book.getId()).append(",").append(book.getTitle()).append(",")
 				.append(book.getAuthor()).append(",").append(book.getPublishedDate()).append(",")
 				.append(book.getStatus()).append(",").append(book.getPrice()).append(",").append(book.getArrivalDate())
 				.append(",").append(book.getDescription()).append("\n").toString();
-
 		return str;
 	}
 
-	@Override
-	public Book stringToBook(String bookstring) {
+	public static Book stringToBook(String bookstring) {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date publDate;
 		Date arrivDate;
@@ -54,15 +45,13 @@ public class ConverterCSV implements IConverter {
 			arrivDate = format.parse(str[6]);
 			book.setArrivalDate(arrivDate);
 			book.setDescription(str[7]);
-
 		} catch (ParseException e) {
 			log.error(e.getMessage());
 		}
 		return book;
 	}
 
-	@Override
-	public String orderToString(Order order) {
+	public static String orderToString(Order order) {
 		String bookIds = "";
 		for (Book b : order.getBooks()) {
 			bookIds += b.getId() + "_";
@@ -74,8 +63,7 @@ public class ConverterCSV implements IConverter {
 		return str;
 	}
 
-	@Override
-	public Order stringToOrder(Session session, String orderstring) {
+	public static Order stringToOrder(IBookDAO bookDao, Session session, String orderstring) {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date execDate;
 		Set<Book> books = new HashSet<Book>();
@@ -99,15 +87,13 @@ public class ConverterCSV implements IConverter {
 		return order;
 	}
 
-	@Override
-	public String preorderToString(Preorder preord) {
+	public static String preorderToString(Preorder preord) {
 		String str = new StringBuilder().append(preord.getId()).append(",").append(preord.getBook().getId()).append(",")
 				.append(preord.getStatus()).append("\n").toString();
 		return str;
 	}
 
-	@Override
-	public Preorder stringToPreorder(Session session, String preorderstring) {
+	public static Preorder stringToPreorder(IBookDAO bookDao, Session session, String preorderstring) {
 
 		Preorder preorder = new Preorder();
 		String[] str = preorderstring.split(",");

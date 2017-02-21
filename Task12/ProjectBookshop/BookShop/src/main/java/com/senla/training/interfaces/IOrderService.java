@@ -4,10 +4,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.senla.training.enums.Status;
-import com.senla.training.model.Order;
 
 public interface IOrderService {
-	public boolean addOrder(Order order);
+	public boolean addOrder(String customer, Calendar executiondate, List<Integer> ids);
 
 	public boolean updateStatus(Integer id, Status status);
 
@@ -23,6 +22,10 @@ public interface IOrderService {
 
 	public boolean cloneOrder(Integer id);
 
-	public Boolean deleteOrder(Integer id);
+	public boolean deleteOrder(Integer id);
+
+	public boolean writeOrdersToCsv();
+
+	public boolean readOrdersFromCsv();
 
 }
