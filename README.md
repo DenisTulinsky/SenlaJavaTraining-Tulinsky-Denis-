@@ -1,1 +1,0 @@
-# SenlaJavaTraining-Tulinsky-Denis-
