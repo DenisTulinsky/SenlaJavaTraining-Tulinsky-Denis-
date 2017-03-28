@@ -1,0 +1,50 @@
+<div ng-app="BookShopWebApp" ng-controller="ordersCtrl"> 
+
+<div class="container" style="  position:absolute;padding-top: 5%">
+  <div classs="row">
+    
+    <div class="panel panel-default">
+     
+     <div class="panel-heading">Orders Menu</div>
+
+      <div class="panel-body">
+        <div class="btn-group" uib-dropdown is-open="status.isopen">
+          <button id="single-button" type="button" class="btn btn" uib-dropdown-toggle ng-disabled="enabled"> Sort By <span class="caret"></span>
+           </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a href="#">Action</a></li>
+        <li role="menuitem"><a href="#">Another action</a></li>
+        <li role="menuitem"><a href="#">Something else here</a></li>
+        </ul>
+    </div>
+      </div>
+
+      <table class="table table-striped">
+          <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Price</th>
+            <th>Execution Date</th>
+             <th>Status</th>
+             <th></th>
+             <th></th>
+         </tr>
+         </thead>
+      <tr ng-repeat="x in orders">
+        <td>{{ x.customer }}</td>
+        <td>{{ x.price }}</td>
+        <td>{{ x.executionDate }}</td>
+        <td>{{ x.status }}</td>
+        <td >
+            <button type="button" class="btn btn-success">View</button>
+            <button type="button" class="btn btn-warning">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+         </td>
+       </tr>
+    </table>
+    </div>
+  
+  </div>
+</div>
+  
+</div>
