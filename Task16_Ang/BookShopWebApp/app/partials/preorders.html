@@ -1,4 +1,4 @@
-<div ng-app="BookShopWebApp" ng-controller="preordersCtrl"> 
+<div ng-app="BookShopWebApp" ng-controller="preorderCtrl"> 
 
 <div class="container" style="  position:absolute;padding-top: 5%">
   <div classs="row">
@@ -8,15 +8,17 @@
       <div class="panel-heading">Preorders Menu</div>
        <div class="panel-body">
         <div class="btn-group" uib-dropdown is-open="status.isopen">
-          <button id="single-button" type="button" class="btn btn" uib-dropdown-toggle ng-disabled="enabled"> Sort By <span class="caret"></span>
+          <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="enabled"> Sort By <span class="caret"></span>
            </button>
       <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-        <li role="menuitem"><a href="#">Action</a></li>
+        <li role="menuitem"><a ng-click="getPreorders('b\.title')">Title</a></li>
+        <li role="menuitem"><a ng-click="getPreorders('count')">Number of Preorders</a></li>
         
         </ul>
     </div>
       </div>
-      <!-- Table --> <table class="table table-striped">
+      <!-- Table -->
+       <table class="table table-striped">
           <thead>
         <tr>
             <th>Book Title</th>
@@ -25,13 +27,12 @@
             <th></th>
          </tr>
          </thead>
-      <tr ng-repeat="x in orders">
+      <tr ng-repeat="x in preorders">
        
         <td>{{ x.book.title }}</td>
         <td>{{ x.count }}</td>
         <td>{{ x.status }}</td>
         <td >
-            <button type="button" class="btn btn-warning">Edit</button>
             <button type="button" class="btn btn-danger">Delete</button>
          </td>
        </tr>

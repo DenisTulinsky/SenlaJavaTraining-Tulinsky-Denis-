@@ -1,0 +1,44 @@
+<div ng-app="BookShopWebApp" ng-controller="basketCtrl"> 
+
+<div class="container" style="  position:absolute;padding-top: 5%">
+  <div classs="row">
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">Basket Menu</div>
+      <div class="panel-body">
+        <h> Books in your basket:</h>
+      </div>
+      <!-- Table -->
+   <table class="table table-striped">
+          <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Date</th>
+             <th>Status</th>
+             <th>Price</th>
+             <th>Arrival Date</th>
+             <th>Description</th>
+             <th></th>
+         </tr>
+         </thead>
+      <tr ng-repeat="x in books">
+        <td>{{ x.title }}</td>
+        <td>{{ x.author }}</td>
+        <td>{{ x.publishedDate }}</td>
+        <td>{{ x.status }}</td>
+        <td>{{ x.price }}</td>
+        <td>{{ x.arrivalDate }}</td>
+        <td>{{ x.description }}</td>
+        <td >
+           <button type="button" class="btn btn-danger" ng-click="deleteFromOrder($index,x.id)">Delete From Basket</button>
+        </td>
+       </tr>
+    </table>
+     </div>
+  <button type="button" class="btn btn-primary" ng-show="contents" ng-click="deleteFromOrder($index,x.id)" >Place this Order</button>
+  </div>
+  
+</div>
+  
+</div>
