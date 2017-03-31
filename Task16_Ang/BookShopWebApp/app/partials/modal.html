@@ -1,0 +1,47 @@
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Im a modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+
+             <label>
+       Title
+       <input type="text" name="title" ng-model="$ctrl.book.title"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+     <label>
+       Author
+       <input type="text" name="author" ng-model="$ctrl.book.author"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+     <label>
+       Publication Date
+       <input type="text" name="publishedDate" ng-model="$ctrl.book.publishedDate"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+     <label>
+       Status
+       <input type="text" name="status" ng-model="$ctrl.book.status"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+     <label>
+       Price
+       <input type="text" name="price" ng-model="$ctrl.book.price"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+     <label>
+      Arrival Date
+       <input type="text" name="arrivalDate" ng-model="$ctrl.book.arrivalDate"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+     <label>
+       Description  
+       <input type="text" name="description" ng-model="$ctrl.book.description"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    
