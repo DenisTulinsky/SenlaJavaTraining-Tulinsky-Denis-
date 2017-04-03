@@ -36,6 +36,15 @@
       </ul>
     </div>
     <button type="button" class="btn btn-success" ng-click="open()">Add Book</button>
+    
+   
+
+<div class="content">
+  <button type="button" class="btn btn-primary pull-right" id="right-panel-link" href="#right-panel" ng-click="open(x,'partials/modalCSV.html')">CSV</button>
+  <div>
+    <div range-slider floor="0" ceiling="19" dragstop="true" ng-model-low="lowerValue" ng-model-high="upperValue"></div>
+  </div>
+</div>
       <!-- Table -->
    <table class="table table-striped"  >
           <thead>
@@ -59,7 +68,7 @@
         <td>{{ x.arrivalDate }}</td>
         <td>{{ x.description }}</td>
         <td >
-            <button type="button" class="btn btn-warning" ng-click="open(x)">Edit</button>
+            <button type="button" class="btn btn-warning" ng-click="open(x, 'partials/modalBook.html')">Edit</button>
             <button type="button" class="btn btn-danger"  confirmed-click="deleteBook(x.id, $index)" ng-confirm-click="Delete Book?">Delete</button>
             <button type="button" class="btn btn-success" ng-click="addToOrder(x)" ng-disabled="existInBasket(x.id)" ng-bind="buttonText(x.id)">Add to Basket</button>
             <button type="button" class="btn btn" ng-controller="preorderCtrl" confirmed-click="addPreorder(x)" ng-confirm-click="Add Pre-Order?">Make a Pre-Order</button>

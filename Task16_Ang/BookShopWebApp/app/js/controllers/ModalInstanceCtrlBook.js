@@ -1,4 +1,4 @@
-angular.module('BookShopWebApp').controller('ModalInstanceCtrl', function ($uibModalInstance,$scope, book) {
+angular.module('BookShopWebApp').controller('ModalInstanceCtrlBook', function ($uibModalInstance,$scope, book) {
   var $ctrl = this;
   $ctrl.book = book;
   $scope.modalHeader = (angular.equals({}, book)) ? "Add Book:" : "Edit this Book:"

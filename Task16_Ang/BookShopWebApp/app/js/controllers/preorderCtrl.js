@@ -5,8 +5,8 @@ angular.module('BookShopWebApp').controller('preorderCtrl', function($scope, $ht
     $scope.addPreorder = function(book){
         var preorder = preorderService.createPreorder(book);
         preorderService.postPreorder(preorder, function(response) {
-     
-    });
+          window.alert(response.status);
+         });
     }
 
     $scope.getPreorders = function(sortParam){
@@ -19,6 +19,7 @@ angular.module('BookShopWebApp').controller('preorderCtrl', function($scope, $ht
      $scope.deletePreorder = function(id, index){ 
   		 preorderService.deletePreorder(id,function(response) {
   		 	$scope.preorders.splice(index, 1)
+        window.alert(response.status);
     });
     }
 
@@ -45,6 +46,7 @@ angular.module('BookShopWebApp').controller('preorderCtrl', function($scope, $ht
       modalInstance.result.then(function (preorder) {
       $scope.modalPreorder = preorder;
       preorderService.putPreorder(preorder, function(response) {
+        window.alert(response.status);
       $scope.getPreorders($scope.sortParam);
       });
      }, function () {

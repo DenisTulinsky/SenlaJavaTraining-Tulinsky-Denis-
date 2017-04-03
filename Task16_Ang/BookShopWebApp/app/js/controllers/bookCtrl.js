@@ -14,6 +14,7 @@ angular.module('BookShopWebApp').controller('bookCtrl', function($scope, $http, 
   	$scope.deleteBook = function(id,index){
   		 bookService.deleteBook(id,function(response) {
           $scope.books.splice(index, 1)
+          window.alert(response.status);
        });
     }
 
@@ -21,6 +22,7 @@ angular.module('BookShopWebApp').controller('bookCtrl', function($scope, $http, 
       bookService.getBooks(sortParam,showUnwanted,id,function(response) {
       $scope.books = response.data;
       });
+      $scope.sortParam = sortParam;
     }
 
   	$scope.existInBasket = function(bookId){ 
@@ -45,9 +47,18 @@ angular.module('BookShopWebApp').controller('bookCtrl', function($scope, $http, 
       return "Add to Basket";
     }
 
+  $scope.uploadFile = function(){
+               var file = $scope.myFile;
+               console.log('file is ' );
+               console.dir(file);
+               fileUpload.uploadFileToUrl(file,function(response) {
+      $scope.books = response.data;
+      });
+   }         
+
 
       $scope.animationsEnabled = true;
-    $scope.open = function (book, size) {
+    $scope.open = function (book, template, size) {
       var modalBook ={};
       if(book){
       angular.copy(book,modalBook);
@@ -56,8 +67,8 @@ angular.module('BookShopWebApp').controller('bookCtrl', function($scope, $http, 
       animation: $scope.animationsEnabled,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-      templateUrl: 'partials/modalBook.html',
-      controller: 'ModalInstanceCtrlBook',
+      templateUrl: template,//'partials/modalBook.html',
+      controller:     'ModalInstanceCtrlBook',
       controllerAs: '$ctrl',
       size: size,
       resolve: {
@@ -72,15 +83,14 @@ angular.module('BookShopWebApp').controller('bookCtrl', function($scope, $http, 
       $scope.modalBook = book;
       if(book.id){
         bookService.putBook(book, function(response) {
-       $scope.message = response.data;
-       alert( "message: " + $scope.message);
-        $scope.refresh();
+          $scope.getBooks($scope.sortParam);
+          window.alert(response.status);
         });
         }else{
         bookService.postBook(modalBook, function(response) {
-        $scope.message = response.data;
-          alert( "message: " + $scope.message);
-        });
+          $scope.getBooks($scope.sortParam);
+          window.alert(response.status);
+           });
         }
         }, function () {
          var modalBook ={};

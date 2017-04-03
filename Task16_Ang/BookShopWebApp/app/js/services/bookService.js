@@ -18,6 +18,15 @@ function putBook(book,callback){
 function  deleteBook(id,callback){
 		  return $http.delete('http://localhost:8080/Servlets/BooksServlet', {params: {id: id}}).then(callback);
 		}
+function uploadFileToUrl (file,callback){
+               var fd = new FormData();
+               fd.append('file', file);
+          return  $https.post('http://localhost:8080/Servlets/BooksServlet', fd, {
+                  transformRequest: angular.identity,
+                  headers: {'Content-Type': csv},
+                  params: {readFromCSV: books}
+               }).then(callback);
+        }
 
     return {
 		getBooks : function (sortParam,showUnwanted,id,callback){
@@ -31,7 +40,10 @@ function  deleteBook(id,callback){
 		},
 		deleteBook : function (id,callback){
 			return 	deleteBook(id,callback);
-		}
-	}
+		},
+	 	uploadFileToUrl : function (file,callback){
+			return 	uploadFileToUrl(file,callback);
+	    }
+      }
 });
 
