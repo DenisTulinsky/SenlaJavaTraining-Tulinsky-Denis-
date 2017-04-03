@@ -1,32 +1,25 @@
 angular.module('BookShopWebApp').factory('bookService', function($http){
 	
-	function getBooks(sortParam,showUnwanted,id,callback){
+function getBooks(sortParam,showUnwanted,id,callback){
 		    return $http({
 			method: "GET",		
             url: "http://localhost:8080/Servlets/BooksServlet", 
             params: {criterion: sortParam, showUnwanted: showUnwanted, id: id}}).then(callback);
-	}
+	    }
 	
-  function  postBook(book,callback){
+function  postBook(book,callback){
 		    return $http.post('http://localhost:8080/Servlets/BooksServlet', book).then(callback);
 		}
 	
-  function putBook(book,callback){
-  return $http({
-    method: 'PUT',
-    url: 'http://localhost:8080/Servlets/BooksServlet',
-    data: JSON.stringify(book),
-    headers: {
-        'Content-type': 'application/json',
-            }
-   }).then(callback);
-		}
+function putBook(book,callback){
+   return $http.put('http://localhost:8080/Servlets/BooksServlet', book).then(callback);
+    	}
 
-  function  deleteBook(id,callback){
+function  deleteBook(id,callback){
 		  return $http.delete('http://localhost:8080/Servlets/BooksServlet', {params: {id: id}}).then(callback);
 		}
 
-return {
+    return {
 		getBooks : function (sortParam,showUnwanted,id,callback){
 			return 	getBooks(sortParam,showUnwanted,id,callback);
 		},
@@ -40,6 +33,5 @@ return {
 			return 	deleteBook(id,callback);
 		}
 	}
-
 });
 

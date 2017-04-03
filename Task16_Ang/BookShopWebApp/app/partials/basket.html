@@ -1,9 +1,8 @@
-<div ng-app="BookShopWebApp" ng-controller="basketCtrl"> 
+<div ng-app="BookShopWebApp"> 
 
 <div class="container" style="  position:absolute;padding-top: 5%">
   <div classs="row">
-    
-    <div class="panel panel-default">
+     <div class="panel panel-default">
       <div class="panel-heading">Basket Menu</div>
       <div class="panel-body">
         <h> Books in your basket:</h>
@@ -36,9 +35,10 @@
        </tr>
     </table>
      </div>
-  <button type="button" class="btn btn-primary" ng-show="contents" ng-click="deleteFromOrder($index,x.id)" >Place this Order</button>
+  <button type="button" class="btn btn-primary" ng-show="contents" ng-controller="preorderCtrl" ng-click="open(x)">Place this Order</button>
   </div>
   
 </div>
   
 </div>
+

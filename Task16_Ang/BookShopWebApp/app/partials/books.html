@@ -1,11 +1,10 @@
-<div ng-app="BookShopWebApp" ng-controller="bookCtrl"> 
+<div ng-app="BookShopWebApp" > 
 
 <div class="container" style="  position:absolute;padding-top: 5%">
   <div classs="row">
      <div class="panel panel-default">
       <div class="panel-heading">Books Menu</div>
       <div class="panel-body">
-
 <!-- Split button -->
        <div class="btn-group" uib-dropdown>
       <button id="split-button" type="button" class="btn btn-primary" ng-click="getBooks('title')">Show All Books</button>
@@ -21,7 +20,6 @@
          <li role="menuitem"><a ng-click="getBooks('status')">Status</a></li>
         </ul>
             </div>
-
  <!-- Split button -->
     <div class="btn-group" uib-dropdown>
       <button id="split-button" type="button" class="btn btn-primary" ng-click="getBooks('title','showUnwanted')">Show Unwanted Books</button>
@@ -37,7 +35,7 @@
          <li role="menuitem"><a ng-click="getBooks('arrivalDate','showUnwanted')">Arrival Date</a></li>
       </ul>
     </div>
-    <button type="button" class="btn btn-success" ng-click="open('lg')">Add Book</button>
+    <button type="button" class="btn btn-success" ng-click="open()">Add Book</button>
       <!-- Table -->
    <table class="table table-striped"  >
           <thead>
@@ -61,9 +59,10 @@
         <td>{{ x.arrivalDate }}</td>
         <td>{{ x.description }}</td>
         <td >
-            <button type="button" class="btn btn-warning" ng-click="open('lg',x)">Edit</button>
-            <button type="button" class="btn btn-danger"  confirmed-click="deleteBook(x.id)" ng-confirm-click="Delete Book?">Delete</button>
+            <button type="button" class="btn btn-warning" ng-click="open(x)">Edit</button>
+            <button type="button" class="btn btn-danger"  confirmed-click="deleteBook(x.id, $index)" ng-confirm-click="Delete Book?">Delete</button>
             <button type="button" class="btn btn-success" ng-click="addToOrder(x)" ng-disabled="existInBasket(x.id)" ng-bind="buttonText(x.id)">Add to Basket</button>
+            <button type="button" class="btn btn" ng-controller="preorderCtrl" confirmed-click="addPreorder(x)" ng-confirm-click="Add Pre-Order?">Make a Pre-Order</button>
         </td>
        </tr>
     </table>
