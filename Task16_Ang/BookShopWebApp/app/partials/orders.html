@@ -58,8 +58,8 @@
         <td>{{ x.executionDate }}</td>
         <td>{{ x.status }}</td>
         <td >
-            <button type="button" class="btn btn-success" ng-click="open(x, 'view')">View</button>
-            <button type="button" class="btn btn-warning" ng-click="open(x)">Edit</button>
+            <button type="button" class="btn btn-success" ng-click="open('undefined',x, 'view')">View</button>
+            <button type="button" class="btn btn-warning" ng-click="open('undefined',x)">Edit</button>
             <button type="button" class="btn btn-danger"  confirmed-click="deleteOrder(x.id, $index)" ng-confirm-click="Delete Order?">Delete</button>
          </td>
        </tr>

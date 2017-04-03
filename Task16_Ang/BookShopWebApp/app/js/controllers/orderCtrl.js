@@ -1,8 +1,8 @@
 'use strict';
-angular.module('BookShopWebApp').controller('orderCtrl', function($scope, $http,$uibModal,$document,orderService) {
+angular.module('BookShopWebApp').controller('orderCtrl', function($scope, $http,$uibModal,$document, $rootScope, orderService) {
 
-$scope.startDate = {};
-$scope.endDate = {};
+$scope.startDate = $rootScope.startDate;
+$scope.endDate = $scope.endDate;
 
 $scope.addOrder = function(order){
         orderService.postOrder(order,function(response) {
@@ -28,11 +28,14 @@ $scope.deleteOrder = function(id,index){
 }
 
    $scope.animationsEnabled = true;
-$scope.open = function (order, view, size) {
+$scope.open = function (books, order, view, size) {
   var modalOrder ={};
   $scope.view = view;
-  angular.copy(order,modalOrder);
-  
+  if(order){
+      angular.copy(order,modalOrder);
+    }else{
+     modalOrder = orderService.createOrder(books);
+    }  
       var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
       ariaLabelledBy: 'modal-title',
@@ -52,12 +55,21 @@ $scope.open = function (order, view, size) {
     }
     });
 
-
     modalInstance.result.then(function (order) {
      $scope.modalOrder = order;
-      orderService.putOrder(order, function(response) {
+ if(order.id){
+         orderService.putOrder(order, function(response) {
+          window.alert(response.status);
      $scope.getOrders($scope.sortParam);
      });
+        }else{
+       orderService.postOrder(order, function(response) {
+      window.alert(response.status);
+         
+           });
+        }
+
+     
     }, function () {
        var modalOrder ={};
        });

@@ -1,0 +1,28 @@
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title" ng-bind="modalHeader"></h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+<table>
+   <thead>
+   <tr>
+            <th>Upload CSV to Books</th>
+            <th>Download CSV from Books</th>
+            
+         </tr>
+ <thead>
+<tr >
+        <td> 
+      <div style="  position:inherit;padding-right: 5%">
+         <input type = "file" file-model = "myFile"/>
+         <button ng-click = "uploadFile()">upload me</button>
+      </div>
+    </td>
+        <td>download</td>
+
+</table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    

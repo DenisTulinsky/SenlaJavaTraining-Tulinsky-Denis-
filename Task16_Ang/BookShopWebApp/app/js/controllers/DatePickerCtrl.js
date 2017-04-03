@@ -1,5 +1,9 @@
-angular.module('BookShopWebApp').controller('DatePickerCtrl', function ($scope) {
+angular.module('BookShopWebApp').controller('DatePickerCtrl', function ($scope,$rootScope) {
   
+$rootScope.startDate = $scope.startDate;
+$rootScope.endDate = $scope.endDate;
+
+
  $scope.today = function() {
     $scope.dt = new Date();
   };
