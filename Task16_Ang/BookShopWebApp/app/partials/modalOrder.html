@@ -1,0 +1,109 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title" ng-bind="modalHeader"></h3>
+</div>
+  <div class="modal-body" id="modal-body">
+
+<form name="outerForm" class="tab-form-demo">
+    <uib-tabset active="activeForm">
+      <uib-tab index="0" heading="Order Information">
+        <ng-form name="nestedForm">
+          <div class="form-group">
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    text-align: left;
+    padding: 5px;
+}
+</style>
+</style>
+<table>
+  <tr>
+    <td>
+      Customer
+    </td>
+    <td>
+     <label>
+       <input type="text" name="customer" ng-disabled="$ctrl.showNoInput()" ng-model="$ctrl.order.customer"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+  </td>
+  </tr>
+  <tr>
+    <td>
+      Price
+    </td>
+   <td>
+     <label>
+        <input type="text" name="price" ng-disabled="$ctrl.showNoInput()" ng-model="$ctrl.order.price"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+    </td>
+    </tr>
+  <tr>
+    <td>
+      Execution Date
+    </td>
+    <td>
+     <label>
+      <input type="text" name="executionDate" ng-disabled="$ctrl.showNoInput()" ng-model="$ctrl.order.executionDate"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+     </td>
+     </tr>
+  <tr>
+    <td>
+      Status
+    </td>
+    <td>
+     <label>
+        <input type="text" name="status" ng-disabled="$ctrl.showNoInput()" ng-model="$ctrl.order.status"
+       ng-minlength="1" ng-maxlength="30">
+    </label>
+     </td>
+     </tr>
+  </table>
+
+ </div>
+        </ng-form>
+      </uib-tab>
+      <uib-tab index="1" heading="Books">
+
+<table class="table table-striped2"  >
+          <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Date</th>
+             <th>Status</th>
+             <th>Price</th>
+             <th>Arrival Date</th>
+             <th>Description</th>
+             <th></th>
+         </tr>
+         </thead>
+      <tr ng-repeat="x in $ctrl.order.books">
+        <td>{{ x.title }}</td>
+        <td>{{ x.author }}</td>
+        <td>{{ x.publishedDate }}</td>
+        <td>{{ x.status }}</td>
+        <td>{{ x.price }}</td>
+        <td>{{ x.arrivalDate }}</td>
+        <td>{{ x.description }}</td>
+        <td>
+          <button type="button" class="btn btn-danger" ng-hide="$ctrl.showNoInput()" ng-click="$ctrl.deleteBook($index)">Delete</button>
+        </td>
+      </tr>
+    </table>
+      </uib-tab>
+     </uib-tabset>
+  </form>
+   </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    
